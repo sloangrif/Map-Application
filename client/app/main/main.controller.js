@@ -2,23 +2,19 @@
 
 angular.module('mapnApp')
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.map = { center: { latitude: 29.6485, longitude: -82.345 }, zoom: 13 };
+    $scope.map = { center: { latitude: 29.6485, longitude: -82.345 }, zoom: 1 };
 
-    $scope.awesomeThings = [];
+    $scope.markers = [{
+      id: 0,
+      latitude: 29.6485,
+      longitude: -82.3450,
+    }];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+    $scope.addMarker = function(marker) {
+      // Check that lat/long was input
+      if (!marker || !marker.latitude || !marker.longitude) return;
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
+      marker.id = $scope.markers.length;
+      $scope.markers.push(marker);
+    }
   });
