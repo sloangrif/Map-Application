@@ -11,16 +11,35 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // bower:js
+      'client/bower_components/es5-shim/es5-shim.js',
       'client/bower_components/jquery/dist/jquery.js',
       'client/bower_components/angular/angular.js',
-      'client/bower_components/angular-mocks/angular-mocks.js',
-      'client/bower_components/angular-resource/angular-resource.js',
-      'client/bower_components/angular-cookies/angular-cookies.js',
-      'client/bower_components/angular-sanitize/angular-sanitize.js',
-      'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'client/bower_components/angular-cookies/angular-cookies.js',
+      'client/bower_components/angular-simple-logger/dist/index.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
+      'client/bower_components/angular-resource/angular-resource.js',
+      'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/bower_components/bootstrap/dist/js/bootstrap.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js',
+      'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js',
+      'client/bower_components/json3/lib/json3.js',
+      'client/bower_components/angular-mocks/angular-mocks.js',
+      'client/bower_components/angular-scenario/angular-scenario.js',
+      // endbower
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',
@@ -47,7 +66,7 @@ module.exports = function(config) {
       stripPrefix: 'client/'
     },
 
-    
+
 
     // list of files / patterns to exclude
     exclude: [],
