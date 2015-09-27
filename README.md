@@ -8,9 +8,9 @@
 
 ## Usage
 
-Install `grunt-cli` and `bower`with npm
+Install build tools with npm
 ```
-npm install -g grunt-cli bower
+npm install -g yo grunt-cli bower generator-angular-fullstack
 ```
 
 Install local dependancies:
