@@ -12,7 +12,7 @@ Pin.find({}).remove(function() {
   Pin.create({
       name : 'Cheese Daddy',
       description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
-      geo: { gtype: "Point", coordinates: [29.651634, -82.324826] },
+      coordinates: [29.651634, -82.324826],
       hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant']
     }, function(err, pin) {
       id = pin._id;      
@@ -34,6 +34,23 @@ Pin.find({}).remove(function() {
     });
   });
 
+  describe('GET /api/pins?hashtags=#cheese,#restaurant', function() {
+
+    it('should respond with JSON array with cheese', function(done) {
+      request(app)
+        .get('/api/pins?hashtags=%23cheese%2C%23restaurant')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          console.log(res.body);
+          if (err) return done(err);
+          res.body.should.be.instanceof(Array);
+          res.body.length.should.be.above(0);
+          done();
+        });
+    });
+  });
+
   describe('GET /api/pins?location=37.781157,-122.398720&radius=25', function() {
 
     it('should respond with JSON array', function(done) {
@@ -50,7 +67,7 @@ Pin.find({}).remove(function() {
     });
   });
 
-  describe('GET /api/pins/' + id, function() {
+  describe('GET /api/pins/:id', function() {
 
     it('should respond with JSON of the \'Cheese Daddy\' Pin', function(done) {
       request(app)
