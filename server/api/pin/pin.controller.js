@@ -31,6 +31,8 @@ exports.index = function(req, res) {
     query.where('hashtags').in(hashtags);
   }
 
+  // Show items with timestamp after an ISO-8601 datetime
+  //TODO create unit test
   if (req.query.since) {
     var date = new Date(req.query.since); 
     if (!isNaN(date)) {
@@ -38,11 +40,20 @@ exports.index = function(req, res) {
     }
   }
   
+  // Show items with timestamp before an ISO-8601 datetime
+  //TODO create unit test
   if (req.query.until) {
     var date = new Date(req.query.until); 
     if (!isNaN(date)) {
       query.where('created_on').lte(date);
     }
+  }
+
+  // Show only items with a bounty
+  //TODO (optional) check only for active bounties
+  //TODO create unit test
+  if (req.query.bounties_only == 1) {
+    query.where('bounties.0').exists();
   }
 
   // Show only active pins
