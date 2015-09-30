@@ -8,10 +8,7 @@ var PinSchema = new Schema({
   description: String,
   hashtags: [String],
   active: Boolean,
-  geo: {
-    gtype: String,
-    coordinates: [[Number]]
-  },
+  coordinates: { type: [Number], index: '2d' },
   created_on: { type: Date, default: Date.now },
   created_by: Schema.Types.ObjectId,
   entries: [Schema.Types.ObjectId],

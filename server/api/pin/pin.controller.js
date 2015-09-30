@@ -19,29 +19,28 @@ var measure = function(lat1, lon1, lat2, lon2) {  // generally used geo measurem
 
 // Get list of pins
 exports.index = function(req, res) {
-  console.log(req.query);
+  req.query.count = req.query.count || 25;
+  req.query.radius = req.query.count || 0;
+  if (req.query.radius > 25000) { return res.status(400).json("Maximum allowed radius is 25000"); }
+  if (req.query.location && req.query.radius < 1) { return res.status(400).json("Location radius must be at least 1"); }
+  if (req.query.count > 200) { return res.status(400).json("Maximum allowed count is 200"); }
 
-  if (req.query.radius > 25000) return res.status(400).json("Maximum allowed radius is 25000");
-  
-  var whereClause = function () {
-    var r = req.query.radius || 1609;
-    if (req.query.location) {
-      var lat1 = req.query.location.split(',')[0]
-      var lng1 = req.query.location.split(',')[1]
-      if (obj.geo.gtype === 'Point') {
-        var coord = obj.geo.coordinates[0];
-        console.log(lat1, lng1, coord[0], coord[1])
-        return measure(lat1, lng1, coord[0], coord[1]) <= r;
-      }
-    }
+  if (req.query.location) {
+    var lat = req.query.location.split(',')[0] || 0;
+    var lng = req.query.location.split(',')[1] || 0;
+    var area = { center: [lat, lng], maxDistance: req.query.radius || 1500 };
   }
 
-  Pin.find({$where: whereClause}, null, {
-    limit: req.query.count || 25
-    }, function (err, pins) {
-      if(err) { return handleError(res, err); }
-      return res.status(200).json(pins);
-    });
+  var query = Pin.find({}).limit(req.query.count);
+
+  if (req.query.location) {
+    query.where('coordinates').near(area)
+  }
+
+  query.exec(function (err, pins) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(pins);
+  });
 };
 
 // Get a single pin

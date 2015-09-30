@@ -17,7 +17,7 @@ module.exports = function(config) {
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/angular-cookies/angular-cookies.js',
-      'client/bower_components/angular-simple-logger/dist/index.js',
+      'client/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
       'client/bower_components/angular-resource/angular-resource.js',
