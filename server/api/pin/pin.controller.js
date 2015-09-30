@@ -31,6 +31,20 @@ exports.index = function(req, res) {
     query.where('hashtags').in(hashtags);
   }
 
+  if (req.query.since) {
+    var date = new Date(req.query.since); 
+    if (!isNaN(date)) {
+      query.where('created_on').gte(date);
+    }
+  }
+  
+  if (req.query.until) {
+    var date = new Date(req.query.until); 
+    if (!isNaN(date)) {
+      query.where('created_on').lte(date);
+    }
+  }
+
   // Show only active pins
   query.where('active').equals(true);
 
