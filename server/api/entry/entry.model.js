@@ -13,7 +13,7 @@ var EntrySchema = new Schema({
     user_id: Schema.Types.ObjectId,
     count: {type: Number, default:0, min:-1, max:1}
   }],
-  hashtags [{type:String, lowercase:true}],
+  hashtags: [{type:String, lowercase:true}],
   posted_on: {type:Date, default:Date.now},
   pin: Schema.Types.ObjectId
 });
