@@ -10,17 +10,17 @@ angular.module('mapnApp')
       longitude: -82.3450,
     }]; 
 
-    $scope.onClick = function (data, event_name, marker) {
+    $scope.onClick = function (data, eventName, marker) {
         $location.path('/pin/' + marker.id);
     };
 
 
     $scope.addMarker = function(marker) {
       // Check that lat/long was input
-      if (!marker || !marker.latitude || !marker.longitude) return;
+      if (!marker || !marker.latitude || !marker.longitude) { return; }
 
       marker.id = $scope.markers.length;
       $scope.markers.push(marker);
-    }
+    };
+
   });
-  

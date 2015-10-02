@@ -11,6 +11,7 @@ exports.index = function(req, res) {
   req.query.limit = req.query.limit || 25;
   req.query.radius = req.query.radius || 0;
   req.query.skip = req.query.skip || 0;
+  var date = new Date(0);
 
   if (req.query.limit > 200 || req.query.limit < 1) { return res.status(400).json("Invalid count. Must be [1-200]"); }
 
@@ -40,7 +41,7 @@ exports.index = function(req, res) {
   // Show items with timestamp after an ISO-8601 datetime
   //TODO create unit test
   if (req.query.since) {
-    var date = new Date(req.query.since); 
+    date = new Date(req.query.since); 
     if (!isNaN(date)) {
       query.where('created_on').gte(date);
     } else {
@@ -51,7 +52,7 @@ exports.index = function(req, res) {
   // Show items with timestamp before an ISO-8601 datetime
   //TODO create unit test
   if (req.query.until) {
-    var date = new Date(req.query.until); 
+    date = new Date(req.query.until); 
     if (!isNaN(date)) {
       query.where('created_on').lte(date);
     } else {
@@ -68,7 +69,7 @@ exports.index = function(req, res) {
   // Show only items with a bounty
   //TODO (optional) check only for active bounties
   //TODO create unit test
-  if (req.query.bounties_only == true) {
+  if (!!req.query.bounties_only) {
     query.where('bounties.0').exists();
   }
 
