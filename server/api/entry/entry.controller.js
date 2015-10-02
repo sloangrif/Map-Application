@@ -3,9 +3,30 @@
 var _ = require('lodash');
 var Entry = require('./entry.model');
 
-// Get list of entrys
+// Get list of entries
 exports.index = function(req, res) {
-  Entry.find(function (err, entrys) {
+  console.log(req.query);
+
+  req.query.limit = req.query.limit || 25;
+
+  var query = Entry.find({}).limit(req.query.limit);
+
+  if (req.query.pin) {
+    query.where('pin').equals(req.query.pin);
+  }
+
+  if (req.query.creator) {
+    
+  }
+
+  if (req.query.creator_id) {
+    query.where('created_by').equals(req.query.creator_id);
+  }
+
+  // Show only active entries
+  query.where('active').equals(true);
+  
+  query.exec(function (err, entrys) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(entrys);
   });
