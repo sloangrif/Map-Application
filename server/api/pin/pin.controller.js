@@ -8,14 +8,14 @@ exports.index = function(req, res) {
   console.log(req.query);
 
   // Defaults
-  req.query.count = req.query.count || 25;
+  req.query.limit = req.query.limit || 25;
   req.query.radius = req.query.radius || 0;
   req.query.skip = req.query.skip || 0;
 
-  if (req.query.count > 200 || req.query.count < 1) { return res.status(400).json("Invalid count. Must be [1-200]"); }
+  if (req.query.limit > 200 || req.query.limit < 1) { return res.status(400).json("Invalid count. Must be [1-200]"); }
 
   // Start a query
-  var query = Pin.find({}).limit(req.query.count);
+  var query = Pin.find({}).limit(req.query.limit);
   
   // Query by location
   if (req.query.location) {
