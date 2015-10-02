@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/mapn-dev'
+    uri: process.env.PROD_MONGODB || 'mongodb://localhost/mapn-dev'
   },
 
   seedDB: true
