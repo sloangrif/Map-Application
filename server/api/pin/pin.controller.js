@@ -7,16 +7,22 @@ var Pin = require('./pin.model');
 exports.index = function(req, res) {
   console.log(req.query);
 
+  // Defaults
   req.query.count = req.query.count || 25;
-  req.query.radius = req.query.count || 0;
-  if (req.query.radius > 25000) { return res.status(400).json("Maximum allowed radius is 25000"); }
-  if (req.query.location && req.query.radius < 1) { return res.status(400).json("Location radius must be at least 1"); }
-  if (req.query.count > 200) { return res.status(400).json("Maximum allowed count is 200"); }
+  req.query.radius = req.query.radius || 0;
+  req.query.skip = req.query.skip || 0;
 
+  if (req.query.count > 200 || req.query.count < 1) { return res.status(400).json("Invalid count. Must be [1-200]"); }
+
+  // Start a query
   var query = Pin.find({}).limit(req.query.count);
   
   // Query by location
   if (req.query.location) {
+    // Error check
+    if (req.query.radius > 25000) { return res.status(400).json("Maximum allowed radius is 25000"); }
+    if (req.query.location && req.query.radius < 1) { return res.status(400).json("Location radius must be at least 1"); }
+
     var lat = req.query.location.split(',')[0] || 0;
     var lng = req.query.location.split(',')[1] || 0;
     query.where('coordinates').near({ center: [lat, lng], maxDistance: req.query.radius || 1500 });
@@ -37,6 +43,8 @@ exports.index = function(req, res) {
     var date = new Date(req.query.since); 
     if (!isNaN(date)) {
       query.where('created_on').gte(date);
+    } else {
+      return res.status(400).json("Since datetime could not be parsed"); 
     }
   }
   
@@ -46,13 +54,21 @@ exports.index = function(req, res) {
     var date = new Date(req.query.until); 
     if (!isNaN(date)) {
       query.where('created_on').lte(date);
+    } else {
+      return res.status(400).json("Until datetime could not be parsed"); 
     }
+  }
+
+  // Skip some items - useful for paging
+  if (req.query.skip > 0) {
+    //WARNING this may not scale well
+    query.skip(req.query.skip);
   }
 
   // Show only items with a bounty
   //TODO (optional) check only for active bounties
   //TODO create unit test
-  if (req.query.bounties_only == 1) {
+  if (req.query.bounties_only == true) {
     query.where('bounties.0').exists();
   }
 
