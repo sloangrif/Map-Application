@@ -18,10 +18,9 @@ angular.module('mapnApp', [
 
   .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
+      //TODO replace w/ env variable
       key: 'AIzaSyDmk6uDQaBEDeyV95zZyXGQgJrkXBlcYAQ'
-      //v: '3.20', //defaults to latest 3.X anyhow
-      //libraries: 'weather,geometry,visualization'
-    })
+    });
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
