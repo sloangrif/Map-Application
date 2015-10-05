@@ -1,5 +1,15 @@
-<div class="col-md-12">
-<h2>Viewing pin {{pin.id}}</h2>
-<h2>{{error}}</h2>
-<pre>{{pin | json}}</pre>
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <h2>Viewing pin {{pin.id}}</h2>
+    <h2>{{error}}</h2>
+    <pre>{{pin | json}}</pre>
+
+    <h1>{{pin.name}}</h1>
+
+    {{pin.description}}
+    </div>
+  </div>
 </div>
