@@ -7,13 +7,23 @@
 
 var Pin = require('../api/pin/pin.model');
 var User = require('../api/user/user.model');
+var Entry = require('../api/entry/entry.model');
 
+Entry.find({}).remove();
 Pin.find({}).remove(function() {
   Pin.create({
     name : 'Cheese Daddy',
     description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
-    geo: { gtype: "Point", coordinates: [29.651634, -82.324826] },
+    coordinates: [29.651634, -82.324826],
     hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant']
+  }, function(err, pin) {
+    var id = pin._id;
+    Entry.create({
+      pin: id,
+      title: "Hello world",
+      description: "Some description",
+      url: "http://youtube.com"
+    });
   });
 });
 
