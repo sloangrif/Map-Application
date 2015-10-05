@@ -2,25 +2,46 @@
 
 var _ = require('lodash');
 var Entry = require('./entry.model');
+var User = require('././entry.model');
 
 // Get list of entries
 exports.index = function(req, res) {
   console.log(req.query);
 
   req.query.limit = req.query.limit || 25;
+  req.query.skip = req.query.skip || 0;
 
-  var query = Entry.find({}).limit(req.query.limit);
+  var query = Entry.
+                find({}).
+                limit(req.query.limit).
+                skip(req.query.skip);
 
   if (req.query.pin) {
     query.where('pin').equals(req.query.pin);
-  }
-
-  if (req.query.creator) {
-    
+  } else {
+    return res.status(400).json("Must include pin id in request parameters");
   }
 
   if (req.query.creator_id) {
     query.where('created_by').equals(req.query.creator_id);
+  }
+
+  if (req.query.since) {
+    date = new Date(req.query.since);
+    if (!isNaN(date)) {
+      query.where('created_on').gte(date);
+    } else {
+      return res.status(400).json("Since datetime could not be parsed");
+    }
+  }
+
+  if (req.query.until) {
+    date = new Date(req.query.until);
+    if (!isNaN(date)) {
+      query.where('created_on').lte(date);
+    } else {
+      return res.status(400).json("Until datetime could not be parsed");
+    }
   }
 
   // Show only active entries
