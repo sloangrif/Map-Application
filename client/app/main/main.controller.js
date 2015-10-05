@@ -7,7 +7,6 @@ angular.module('mapnApp')
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
     var radius   = $scope.map.zoom * 1000;
 
-
     $http.get('/api/pins?location='+location+'&radius='+radius).
       then(function(response) {
         angular.forEach(response.data, function(pin) {
@@ -29,10 +28,10 @@ angular.module('mapnApp')
 
     $scope.addMarker = function(marker) {
       // Check that lat/long was input
-      if (!marker || !marker.latitude || !marker.longitude) { return; }
+      if (!marker || !marker.latitude || !marker.longitude) return;
 
       marker.id = $scope.markers.length;
       $scope.markers.push(marker);
-    };
-
+    }
   });
+
