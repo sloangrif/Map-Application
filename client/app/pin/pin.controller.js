@@ -8,7 +8,14 @@ angular.module('mapnApp')
 
     $http.get('/api/pins/'+id).
       then(function(response) {
-        $scope.pin = response.data;
+        var pin = response.data
+        $http.get('/api/entries?pin='+id).
+          then(function(response) {
+            pin.entries = response.data;
+            $scope.pin = pin;
+          }, function(error) {
+            $scope.error = error.status + '\t' + error.statusText;
+          });
       }, function(error) {
         $scope.error = error.status + '\t' + error.statusText;
     });

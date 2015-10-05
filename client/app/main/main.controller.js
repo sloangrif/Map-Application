@@ -9,14 +9,16 @@ angular.module('mapnApp')
 
     $http.get('/api/pins?location='+location+'&radius='+radius).
       then(function(response) {
+        var markers = [];
         angular.forEach(response.data, function(pin) {
           var marker = {
             'id': pin._id,
             'latitude': pin.coordinates[0],
             'longitude': pin.coordinates[1]
           };
-          $scope.markers.push(marker);
+          markers.push(marker);
         });
+        $scope.markers = markers;
       }, function(error) {
         $scope.error = error.status + '\t' + error.statusText;
     });
