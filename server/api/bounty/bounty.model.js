@@ -8,7 +8,7 @@ var BountySchema = new Schema({
   description: String,
   hashtags: [{type: String, lowercase: true}],
   active: {type: Boolean, default: true},
-  value: number,
+  value: Number,
   created_on: {type: Date, default: Date.now},
   expires_on: Date,
   created_by: Schema.Types.ObjectId,
