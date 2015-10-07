@@ -11,7 +11,6 @@ angular.module('mapnApp')
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
-          phone: $scope.user.phone,
           email: $scope.user.email,
           password: $scope.user.password
         })
@@ -31,7 +30,7 @@ angular.module('mapnApp')
         });
       }
     };
-    
+
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
