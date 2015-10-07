@@ -1,0 +1,15 @@
+.navbar-default {
+  background-color: #e67e22;
+  border-color: #d35400;
+
+}
+.navbar-default .navbar-brand{
+	color: #ffffff;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.img-circle{
+	border-radius: 50%;
+}
