@@ -1,5 +1,7 @@
+<link rel="stylesheet" href="navbar/navbar.scss">
+
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
         <span class="sr-only">Toggle navigation</span>
@@ -7,23 +9,40 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">mapn</a>
+      <a href="/"><img src="app/main/logo.jpg" class="logo"></a>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul>
+        </li> 
+      </ul> -->
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+        <li class="dropdown" ng-show="isLoggedIn()">
+          <a id="preferences" class="dropdown-toggle" date-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Hello {{ getCurrentUser().name }}
+          <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="preferences">
+              <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Administration</a></li>
+              <li ng-show="isAdmin()" role="separator" class="divider"></li>
+              <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+              <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+            </ul>
+        </li>
       </ul>
+
+      <div class="col-sm-3 col-md-3 pull-right" ng-show="isLoggedIn()">
+        <form class="navbar-form" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+        </form>
+        </div>
     </div>
   </div>
 </div>

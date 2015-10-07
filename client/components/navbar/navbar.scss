@@ -1,0 +1,56 @@
+.logo {
+	max-width: 50px;
+	max-height: 50px;
+}
+
+.navbar-default {
+	background-color: #D66900;
+	border-bottom-color: #FFF;
+}
+
+/* Links */
+.navbar-default .navbar-nav > li > a {
+    color: #FFF;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #333;
+    background-color: #D65700;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #FFF;
+    background-color: #D65700;
+}
+
+.navbar-default .navbar-nav > li > ul {
+	background-color: #D66900;
+}
+.navbar-default .navbar-nav > li > ul > li > a{
+	color: #FFF;
+}
+
+.divider{
+	color: #FFF;
+}
+
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+	border-top-color: #FFF;
+	border-bottom-color: #FFF;
+}
+
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #FFF;
+    border-bottom-color: #FFF;
+}
