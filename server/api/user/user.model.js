@@ -7,6 +7,7 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
+  phone: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -57,6 +58,15 @@ UserSchema
  * Validations
  */
 
+// Validate phone number
+UserSchema
+  .path('phone')
+  .validate(function(phone) {
+    var reg = /^(\([2-9]\d{2}\)\s?|[2-9]\d{2}-?)\d{3}-?\d{4}$/;
+    if (authTypes.indexOf(this.provider) !== -1) return true;
+    return (reg.test(phone));
+  }, 'Invalid phone number');
+
 // Validate empty email
 UserSchema
   .path('email')
@@ -72,6 +82,25 @@ UserSchema
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return hashedPassword.length;
   }, 'Password cannot be blank');
+
+// Validate phone number is not taken
+UserSchema
+  .path('phone')
+  .validate(function(value, respond) {
+    var self = this;
+    this.constructor.findOne({phone: value}, function(err, user) {
+      if(err) throw err;
+      if(user) {
+        if(self.id === user.id) return respond(true);
+        return respond(false);
+      }
+      respond(true);
+    });
+}, 'The specified phone number is already in use.');
+
+var validatePresenceOf = function(value) {
+  return value && value.length;
+};
 
 // Validate email is not taken
 UserSchema
