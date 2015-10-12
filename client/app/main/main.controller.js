@@ -30,10 +30,10 @@ angular.module('mapnApp')
 
     $scope.addMarker = function(marker) {
       // Check that lat/long was input
-      if (!marker || !marker.latitude || !marker.longitude) return;
+      if (!marker || !marker.latitude || !marker.longitude) { return; }
 
       marker.id = $scope.markers.length;
       $scope.markers.push(marker);
-    }
+    };
   });
 
