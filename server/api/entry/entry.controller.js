@@ -6,7 +6,7 @@ var User = require('././entry.model');
 
 // Get list of entries
 exports.index = function(req, res) {
-  console.log(req.query);
+  var date = new Date(0);
 
   req.query.limit = req.query.limit || 25;
   req.query.skip = req.query.skip || 0;
