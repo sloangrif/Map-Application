@@ -4,6 +4,7 @@
 
 'use strict';
 
+var express = require('express');
 var errors = require('./components/errors');
 var path = require('path');
 
@@ -15,9 +16,10 @@ module.exports = function(app) {
   app.use('/api/entries', require('./api/entry'));
 
   app.use('/auth', require('./auth'));
+  app.use('/static', express.static(__dirname + "/static"));
 
   // All undefined asset or api routes should return a 404
-  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
+  app.route('/:url(api|auth|components|app|bower_components|assets|static)/*')
    .get(errors[404]);
 
   // All other routes should redirect to the index.html
