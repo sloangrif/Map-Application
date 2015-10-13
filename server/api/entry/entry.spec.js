@@ -18,6 +18,7 @@ it('should respond with an error', function(done) {
    });
  });
 
+/*
 it('should respond with a JSON array', function(done) {
      request(app)
        .get('/api/pins?location=37.781157,-122.398720&radius=25')
@@ -38,3 +39,4 @@ it('should respond with a JSON array', function(done) {
          done();
        });
    });
+*/

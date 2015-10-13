@@ -56,6 +56,10 @@ exports.index = function(req, res) {
 // Get a single entry
 exports.show = function(req, res) {
   Entry.findById(req.params.id, function (err, entry) {
+    // Don't return scores
+    if (entry.votes) {
+      delete entry.votes;
+    }
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
     return res.json(entry);
@@ -64,7 +68,6 @@ exports.show = function(req, res) {
 
 // Creates a new entry in the DB.
 exports.create = function(req, res) {
-  console.log(req);
   Entry.create(req.body, function(err, entry) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(entry);
