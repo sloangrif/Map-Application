@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var PinSchema = new Schema({
   name: {type: String, required: true},
   description: String,
-  thumbnail: {type: String, required: true},
+  thumbnail: {type: String, required: false},
   hashtags: [{type: String, lowercase: true}],
   active: {type: Boolean, default: true},
   coordinates: { type: [Number], index: '2d', required: true },
