@@ -9,24 +9,6 @@ var Pin = require('../api/pin/pin.model');
 var User = require('../api/user/user.model');
 var Entry = require('../api/entry/entry.model');
 
-Entry.find({}).remove();
-Pin.find({}).remove(function() {
-  Pin.create({
-    name : 'Cheese Daddy',
-    description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
-    coordinates: [29.651634, -82.324826],
-    hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant']
-  }, function(err, pin) {
-    var id = pin._id;
-    Entry.create({
-      pin: id,
-      title: "Hello world",
-      description: "Some description",
-      url: "http://youtube.com"
-    });
-  });
-});
-
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
@@ -34,7 +16,8 @@ User.find({}).remove(function() {
     phone: '2345678901',
     email: 'test@test.com',
     password: 'test'
-  }, {
+  });
+  User.create({
     provider: 'local',
     role: 'admin',
     name: 'Admin',
@@ -43,6 +26,29 @@ User.find({}).remove(function() {
     password: 'admin'
   }, function() {
       console.log('finished populating users');
+  });
+});
+
+Entry.find({}).remove();
+Pin.find({}).remove(function() {
+  Pin.create({
+    name : 'Cheese Daddy',
+    description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
+    coordinates: [29.651634, -82.324826],
+    hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant'],
+    thumbnail: '/static/thumbnails/cheese.png'
+  }, function(err, pin) {
+    if(err) {
+      console.warn(err);
+      return;
     }
-  );
+    var id = pin._id;
+    Entry.create({
+      pin: id,
+      title: 'Hello world',
+      description: 'Some description',
+      url: '/static/videos/0/cheese_id.mp4',
+      thumbnail: '/static/thumbnails/cheese_id.png'
+    });
+  });
 });
