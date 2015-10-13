@@ -64,6 +64,7 @@ exports.show = function(req, res) {
 
 // Creates a new entry in the DB.
 exports.create = function(req, res) {
+  console.log(req);
   Entry.create(req.body, function(err, entry) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(entry);

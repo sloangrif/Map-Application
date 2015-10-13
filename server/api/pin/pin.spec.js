@@ -27,7 +27,6 @@ Pin.find({}).remove(function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          console.log(res.body);
           if (err) return done(err);
           res.body.should.be.instanceof(Array);
           done();
@@ -43,7 +42,6 @@ Pin.find({}).remove(function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          console.log(res.body);
           if (err) return done(err);
           res.body.should.be.instanceof(Array);
           res.body.length.should.be.above(0);
@@ -60,7 +58,6 @@ Pin.find({}).remove(function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          console.log(res.body);
           if (err) return done(err);
           res.body.should.be.instanceof(Array);
           done();
@@ -76,7 +73,6 @@ Pin.find({}).remove(function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          console.log(res.body);
           if (err) return done(err);
           res.body.should.be.instanceof(Object);
           res.body.name.should.be.equal('Cheese Daddy');

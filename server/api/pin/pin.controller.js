@@ -5,7 +5,6 @@ var Pin = require('./pin.model');
 
 // Get list of pins
 exports.index = function(req, res) {
-  console.log(req.query);
 
   // Defaults
   req.query.limit = req.query.limit || 25;
@@ -34,7 +33,6 @@ exports.index = function(req, res) {
     var hashtags = req.query.hashtags.split(',').map(function(str) {
       return str.replace('#','').toLowerCase();
     });
-    console.log(hashtags)
     query.where('hashtags').in(hashtags);
   }
 
