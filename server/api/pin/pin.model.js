@@ -16,4 +16,11 @@ var PinSchema = new Schema({
   bounties: [Schema.Types.ObjectId]
 });
 
+
+PinSchema.
+  path('coordinates').
+  validate(function(coords) {
+    if (coords.length !== 2) { return false; }
+  }, "Coordinates must be in the form [Lat, Lng]");
+
 module.exports = mongoose.model('Pin', PinSchema);

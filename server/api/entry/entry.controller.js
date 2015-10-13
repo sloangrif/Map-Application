@@ -56,6 +56,10 @@ exports.index = function(req, res) {
 // Get a single entry
 exports.show = function(req, res) {
   Entry.findById(req.params.id, function (err, entry) {
+    // Don't return scores
+    if (entry.votes) {
+      delete entry.votes;
+    }
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
     return res.json(entry);
