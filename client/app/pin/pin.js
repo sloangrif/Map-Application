@@ -8,4 +8,9 @@ angular.module('mapnApp')
         templateUrl: 'app/pin/pin.html',
         controller: 'PinCtrl'
       });
-  });
+  }
+  /*
+  
+*/
+
+  );

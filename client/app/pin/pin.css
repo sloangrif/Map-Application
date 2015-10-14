@@ -1,3 +1,22 @@
 .img-circle{
 	border-radius: 50%;
 }
+.outer{
+	position: relative;
+	height: 150px;
+	background-color: gray;
+}
+.inner{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+}
+button{
+	background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
