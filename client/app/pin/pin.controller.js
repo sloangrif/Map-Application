@@ -6,6 +6,16 @@ angular.module('mapnApp')
     $scope.pin = {'id': id};
     $scope.error = '';
 
+    $scope.countLike = 6;
+    $scope.countDislike = 3;
+
+    $scope.like = function(){
+      $scope.countLike +=1;
+    }
+
+    $scope.dislike = function(){
+      $scope.countDislike +=1;
+    }
     $http.get('/api/pins/'+id).
       then(function(response) {
         var pin = response.data;
