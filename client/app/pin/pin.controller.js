@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('PinCtrl', function ($scope, $stateParams, $http) {
+  .controller('PinCtrl', function ($scope, $stateParams, $http, $modal) {
     var id = $stateParams.id;
     $scope.pin = {'id': id};
     $scope.error = '';
@@ -16,6 +16,21 @@ angular.module('mapnApp')
     $scope.dislike = function(){
       $scope.countDislike +=1;
     }
+
+    $scope.addItem = function() {
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'components/upload/upload.html',
+        controller: 'UploadCtrl',
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+
+    }
+
     $http.get('/api/pins/'+id).
       then(function(response) {
         var pin = response.data;

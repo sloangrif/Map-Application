@@ -3,6 +3,8 @@
 var _ = require('lodash');
 var Entry = require('./entry.model');
 var User = require('././entry.model');
+var fs = require('fs');
+var path = require('path');
 
 var getUserScore = function(userId, entry) {
   if (!userId) return 0;
@@ -131,6 +133,28 @@ exports.dislike = function(req, res) {
 };
 // Creates a new entry in the DB.
 exports.create = function(req, res) {
+  var file = req.files.file;
+  var fpath = file.path.split("/");
+  var fileName = fpath[2];
+  var destPath = path.resolve('./server/static') + "/" + fileName;
+
+  if (!req.body || !req.body.pin) { 
+    return res.status(400).json("Must include pin in data");
+  }
+  
+  var source = fs.createReadStream(file.path);
+  var dest = fs.createWriteStream(destPath);
+
+  // move to correct dir
+  source.pipe(dest);
+  source.on('end', function() { console.log("success") /* copied */ });
+  source.on('error', function(err) { return handleError(res,err) /* error */ });
+  dest.on('error', function(err) { return handleError(res, err) /* error */ });
+
+  req.body.url = destPath;
+  req.body.created_by = req.user._id;
+  
+  // TODO make sure the pin exists..
   Entry.create(req.body, function(err, entry) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(entry);

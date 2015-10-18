@@ -4,12 +4,11 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var EntrySchema = new Schema({
-  title: {type: String, required: true},
-  description: String,
+  description: {type: String, default: ""},
   active: {type: Boolean, default: true},
   created_by: Schema.Types.ObjectId,
   url: {type: String, required: true},
-  thumbnail: {type: String, required: true},
+  thumbnail: {type: String, required: false},
   votes: [{
     user_id: Schema.Types.ObjectId,
     score: {type: Number, default:0, min:-1, max:1}
