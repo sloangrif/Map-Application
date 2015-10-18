@@ -4,10 +4,22 @@ var _ = require('lodash');
 var Entry = require('./entry.model');
 var User = require('././entry.model');
 
+var getUserScore = function(userId, entry) {
+  if (!userId) return 0;
+
+  var score = 0;
+  var i = _.findIndex(entry.votes, 'user_id', userId);
+  if (i > -1) {
+    score = entry.votes[i].score;
+  }
+  return score;
+}
+
 // Get list of entries
 exports.index = function(req, res) {
   var date = new Date(0);
-
+  req.user = req.user || {};
+  var userId = req.user._id;
   req.query.limit = req.query.limit || 25;
   req.query.skip = req.query.skip || 0;
 
@@ -47,25 +59,76 @@ exports.index = function(req, res) {
   // Show only active entries
   query.where('active').equals(true);
   
-  query.exec(function (err, entrys) {
+  query.exec(function (err, entries) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(entrys);
+    var response = [];
+    entries.forEach(function(entry) {
+      var tempEntry = entry.toObject();
+      tempEntry.score = getUserScore(userId, entry);
+      delete tempEntry.votes;
+      response.push(tempEntry);
+    });
+    return res.status(200).json(response);
   });
 };
 
 // Get a single entry
 exports.show = function(req, res) {
   Entry.findById(req.params.id, function (err, entry) {
-    // Don't return scores
-    if (entry.votes) {
-      delete entry.votes;
-    }
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
-    return res.json(entry);
+    // Don't return scores
+    var response = entry.toObject();
+    var userId = req.user._id;
+    delete reponse.votes;
+    response.score = getUserScore(userId,entry);
+    return res.json(response);
   });
 };
 
+// Like an entry
+exports.like = function(req, res) {
+  if (!req.user || !req.user._id) {
+    return req.error("Not logged in");
+  }
+  var userId = req.user._id;
+  Entry.findById(req.params.id, function (err, entry) {
+    if(!entry) { return res.status(404).send('Not Found'); }
+    if(err) { return handleError(res, err); }
+    entry.votes = entry.votes || [];
+    var i = _.findIndex(entry.votes, 'user_id', userId);
+    if (i > -1) {
+      entry.votes[i].score = 1;
+    } else {
+      entry.votes.push({'user_id': userId, 'score': 1});
+    }
+    entry.save();
+
+    return res.status(200);
+  });
+};
+
+exports.dislike = function(req, res) {
+  if (!req.user || !req.user._id) {
+    return req.error("Not logged in");
+  }
+  var userId = req.user._id;
+  Entry.findById(req.params.id, function (err, entry) {
+    if(!entry) { return res.status(404).send('Not Found'); }
+    if(err) { return handleError(res, err); }
+    entry.votes = entry.votes || [];
+    var i = _.findIndex(entry.votes, 'user_id', userId);
+    if (i > -1) {
+      entry.votes[i].score = -1;
+    } else {
+      entry.votes.push({'user_id': userId, 'score': -1});
+    }
+    entry.save();
+    console.log(entry);
+
+    return res.status(200);
+  });
+};
 // Creates a new entry in the DB.
 exports.create = function(req, res) {
   Entry.create(req.body, function(err, entry) {
