@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('PinCtrl', function ($scope, $stateParams, $http, $modal) {
+  .controller('PinCtrl', function ($scope, $stateParams, $http, $modal, $timeout) {
     var id = $stateParams.id;
     $scope.pin = {'id': id};
     $scope.error = '';
@@ -18,18 +18,17 @@ angular.module('mapnApp')
     }
 
     $scope.addItem = function() {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'components/upload/upload.html',
-        controller: 'UploadCtrl',
-        resolve: {
-          items: function () {
-            return $scope.items;
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'components/upload/upload.html',
+          controller: 'UploadCtrl',
+          resolve: {
+            file: function () {
+              return $scope.file;
+            }
           }
-        }
-      });
-
-    }
+        });
+      };
 
     $http.get('/api/pins/'+id).
       then(function(response) {

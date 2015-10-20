@@ -1,40 +1,53 @@
 <link rel="stylesheet" href="upload/upload.scss">
 
-<div>
-  <div class="modal-header">
-    <h3 class="modal-title">Upload a video</h3>
-  </div>
-  <div class="modal-body">
+<div class="modal-header">
+  <h3 class="modal-title">Upload a video</h3>
+   <ui-gmap-google-map center='map.center' zoom='map.zoom' id="angular-google-map-upload">
+          <ui-gmap-markers models="markers" coords="'self'" click="onClick">
+          </ui-gmap-markers>
+        </ui-gmap-google-map>
+</div>
+
+<div class="modal-body">
+
+  <div class="row">
     <div class="alert alert-danger" role="alert" ng-show="errFile.$error">
       <h4>Error</h4>
       {{errFile.$error}}: {{errFile.$errorParam}}
     </div>
-    <div class="form-horizontal">
-      <div class="form-group">
-        <label for="desc" class="col-sm-2 control-label">Description</label>
-        <div class="col-sm-10">
-          <textarea  class="form-control" id="desc" ng-model="modal.description"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="title" class="col-sm-2 control-label">Video</label>
-        <div class="col-sm-10">
-          <button class="btn btn-primary" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
-              accept="video/*" ngf-max-height="1000" ngf-max-size="10MB">
-            Select file
-          </button>
-          {{f.name}}
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-10 col-sm-offset-2">
-          <video controls ngf-src="f" width="100%"></video>
-        </div>
-      </div>
+  </div>
+
+
+  <form class="form" name="form">
+
+    <div class="form-group">
+        <textarea  class="form-control" id="desc" ng-model="modal.description"
+        placeholder="Say something..."/>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-  </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" type="file" ngf-select ng-model="file" name="file"
+          accept="video/*" ngf-max-size="10MB"
+          ngf-max-duration="20" capture>
+        Change Video
+      </button>
+      <code>{{file.name}}</code>
+    </div>
+
+    <div class="form-group">
+      <video controls ngf-src="file" width="100%"></video>
+    </div>
+
+  </form>
+
+  <progressbar value="progress.value" class="progress-striped" type="progress.type">
+    {{progress.value}}
+  </progressbar>
+
+  {{errorMsg}}
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="submit(form)" ng-disabled="loading">Upload</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
 </div>

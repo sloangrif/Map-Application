@@ -5,6 +5,7 @@ var Entry = require('./entry.model');
 var User = require('././entry.model');
 var fs = require('fs');
 var path = require('path');
+var ffmpeg = require('fluent-ffmpeg');
 
 var getUserScore = function(userId, entry) {
   if (!userId) return 0;
@@ -60,7 +61,7 @@ exports.index = function(req, res) {
 
   // Show only active entries
   query.where('active').equals(true);
-  
+
   query.exec(function (err, entries) {
     if(err) { return handleError(res, err); }
     var response = [];
@@ -133,15 +134,18 @@ exports.dislike = function(req, res) {
 };
 // Creates a new entry in the DB.
 exports.create = function(req, res) {
-  var file = req.files.file;
-  var fpath = file.path.split("/");
-  var fileName = fpath[2];
-  var destPath = path.resolve('./server/static') + "/" + fileName;
 
-  if (!req.body || !req.body.pin) { 
-    return res.status(400).json("Must include pin in data");
+  if (!req.body || !req.body.pin || !req.files.file) {
+    return res.status(400).json("Must include pin and video in data");
   }
-  
+
+  var file = req.files.file;
+  var pin = req.body.pin;
+  var fileExt = file.path.substring(file.path.lastIndexOf('.'));
+  var basePath = path.resolve('./server/static');
+  var destPath = basePath + "/" + pin + fileExt;
+  var screenshotFile = pin + '.png';
+
   var source = fs.createReadStream(file.path);
   var dest = fs.createWriteStream(destPath);
 
@@ -150,10 +154,22 @@ exports.create = function(req, res) {
   source.on('end', function() { console.log("success") /* copied */ });
   source.on('error', function(err) { return handleError(res,err) /* error */ });
   dest.on('error', function(err) { return handleError(res, err) /* error */ });
+  // delete tmp file
+  fs.unlink(file.path);
 
-  req.body.url = destPath;
+  //save a thumbnail
+  var proc = new ffmpeg(destPath)
+  .takeScreenshots({
+      filename: screenshotFile,
+      count: 1
+    }, basePath, function(err) {
+    console.log('screenshots were saved')
+  });
+
+  req.body.url = "/static/" + pin + fileExt;
+  req.body.thumbnail = "/static/" + screenshotFile;
   req.body.created_by = req.user._id;
-  
+
   // TODO make sure the pin exists..
   Entry.create(req.body, function(err, entry) {
     if(err) { return handleError(res, err); }
