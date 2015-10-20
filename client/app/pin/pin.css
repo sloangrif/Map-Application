@@ -20,3 +20,6 @@ button{
     overflow: hidden;
     outline:none;
 }
+.table{
+	background-color: ghostwhite;
+}
