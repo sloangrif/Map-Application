@@ -41,18 +41,19 @@
     <!--
     format to java script object (angular thing)
     <pre>{{pin | json}}</pre>
+    ng-style="{'background':module.thumbnail}"
     -->
   </div>
   <div class="row">  
     <!-- Likes -->
-    <div class="col-sm-3" style="text-align:center;" ng-repeat="module in pin.entries">
-      <div class="outer">
-        <div class="inner">
+    <div class="col-sm-3"  style="text-align:center; margin-bottom:10px;" ng-repeat="module in pin.entries">
+      <div class="outer" ng-style="{'background-image':'url({{module.thumbnail}})'}">
+        <div class="inner" style="vertical-align:middle;">
           <button type="button" ng-click="like(module)" >
               <h2><i class="fa fa-chevron-up"></i>
               {{module.likes}}</h2>
           </button>
-          <button type="button" ng-click="dislike(module)" >
+          <button type="button" ng-click="dislike(module)">
               <h2><i class="fa fa-chevron-down"></i>
               {{module.dislikes}}</h2>
           </button>
