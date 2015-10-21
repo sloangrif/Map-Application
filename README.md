@@ -4,7 +4,8 @@
 ## Prerequisites
 
 * NodeJS 0.12.x
-* MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - If you plan on scaffolding your project with mongoose, you'll need mongoDB to be installed and have the `mongod` process running.
+* MongoDB (optional) - Download and Install [MongoDB](http://www.mongodb.org/downloads) - If you plan on scaffolding your project with mongoose, you'll need mongoDB to be installed and have the `mongod` process running.
+* FFmpeg (optional) - Download and Install [FFmpeg](https://www.ffmpeg.org/download.html) - If you plan on uploading videos to the app, `ffmpeg` must be in your PATH.
 
 ## Usage
 
