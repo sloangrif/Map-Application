@@ -7,7 +7,7 @@ var EntrySchema = new Schema({
   description: {type: String, default: ""},
   active: {type: Boolean, default: true},
   created_by: Schema.Types.ObjectId,
-  url: {type: String, required: true},
+  video: {type: String, required: true},
   thumbnail: {type: String, required: false},
   votes: [{
     user_id: Schema.Types.ObjectId,

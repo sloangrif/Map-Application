@@ -59,7 +59,7 @@ Pin.find({}).remove(function() {
       pin: id,
       title: 'Hello world',
       description: 'Some description',
-      url: '/static/test/2be7787f-ce48-40a9-a53e-1a53ffc421e2.mp4',
+      video: '/static/test/2be7787f-ce48-40a9-a53e-1a53ffc421e2.mp4',
       thumbnail: '/static/test/2be7787f-ce48-40a9-a53e-1a53ffc421e2.png'
     });
   });

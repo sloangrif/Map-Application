@@ -168,7 +168,7 @@ exports.create = function(req, res) {
     console.log('screenshots were saved')
   });
 
-  req.body.url = "/static/" + videoFile;
+  req.body.video = "/static/" + videoFile;
   req.body.thumbnail = "/static/" + screenshotFile;
   req.body.created_by = req.user._id;
 
