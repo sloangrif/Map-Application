@@ -9,12 +9,18 @@ angular.module('mapnApp')
     $scope.countLike = 6;
     $scope.countDislike = 3;
 
-    $scope.like = function(){
-      $scope.countLike +=1;
+    $scope.like = function(entry){
+      if(entry.score==0){
+        entry.score = 1;
+        entry.likes++;
+      }
     }
 
-    $scope.dislike = function(){
-      $scope.countDislike +=1;
+    $scope.dislike = function(entry){
+      if(entry.score==0){
+        entry.score = -1;
+        entry.dislikes++;
+      }
     }
     $http.get('/api/pins/'+id).
       then(function(response) {
