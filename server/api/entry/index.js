@@ -4,10 +4,11 @@ var express = require('express');
 var controller = require('./entry.controller');
 var auth = require('../../auth/auth.service');
 var router = express.Router();
+var multipart = require('connect-multiparty');
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
-router.post('/', controller.create);
+router.post('/', multipart(), auth.isAuthenticated(), controller.create);
 router.post('/:id/like', auth.isAuthenticated(), controller.like);
 router.post('/:id/dislike', auth.isAuthenticated(), controller.dislike);
 router.put('/:id', controller.update);
