@@ -7,7 +7,10 @@ angular.module('mapnApp')
     $scope.error = '';
 
     $scope.uploadOpen = false;
-    $scope.isLoggedIn = Auth.isLoggedIn();
+    $scope.isLoggedIn = false;
+    Auth.isLoggedInAsync(function(loggedIn) {
+      $scope.isLoggedIn = loggedIn;
+    });
 
     $scope.like = function(){
       $scope.countLike +=1;

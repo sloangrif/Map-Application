@@ -6,28 +6,11 @@ angular.module('mapnApp')
     $scope.file = file;
     $scope.progress = {
       value: 0,
-      type: 'success'
+      type: 'default'
     };
     $scope.uploading = false;
     $scope.pin = pin;
     $scope.errors = errors || [];
-
-    $scope.map = { center: { latitude: 0, longitude: 0 }, zoom: 14 };
-
-    $http.get('/api/pins/'+$stateParams.id).
-      then(function(response) {
-        var markers = [];
-        var pin = response.data;
-        $scope.map.center.latitude = pin.coordinates[0];
-        $scope.map.center.longitude = pin.coordinates[1]
-        $scope.markers = [{
-          'id': pin._id,
-          'latitude': pin.coordinates[0],
-          'longitude': pin.coordinates[1]
-        }];
-      }, function(error) {
-        $scope.errors.push({'$error':error.status, '$errorParam':error.statusText});
-    });
 
     $scope.getErrorMsg = function(errors) {
       var errMsg = '';
@@ -54,7 +37,7 @@ angular.module('mapnApp')
     };
 
     $scope.cancel = function() {
-      $modalInstance.close('cancel');
+      $modalInstance.dismiss('cancel');
     };
 
     $scope.upload = function(file, errFiles) {
@@ -65,15 +48,18 @@ angular.module('mapnApp')
           file: file,
           data: $scope.modal
       }).then(function (response) {
+          $scope.progress.type = 'success'
           $timeout(function () {
               file.result = response.data;
-              $window.location.reload(); //TODO don't reload
+              $scope.pin.entries.unshift(file.result);
+              $modalInstance.close('done')
           }, 1000);
       }, function (response) {
           if (response.status > 0) {
               $scope.errorMsg = response.status + ': ' + response.data;
               $scope.progress.type = 'warning';
               $scope.uploading = false;
+              $scope.progress.value = 100;
           }
       }, function (evt) {
           file.progress = Math.min(100, parseInt(100.0 *
