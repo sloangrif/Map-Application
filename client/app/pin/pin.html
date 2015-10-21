@@ -18,14 +18,9 @@
     </div>
   </div>
 <div class="table">
-  <div class="row">
-    <div class="col-lg-12 ">
-      <p></p>
-    </div>
-  </div>  
+  
   <!-- Video Section -->
   <div class="row">
-    <!--  -->
     <div class="col-sm-9">
        <font size="4">Videos</font>
     </div>
@@ -41,35 +36,27 @@
         <span aria-hidden="true"></span>
       </button>
     </div>
-    
-    <pre>{{pin | json}}</pre>s
-    
+    <!--
+    format to java script object (angular thing)
+    <pre>{{pin | json}}</pre>
+    -->
     <!-- Likes -->
     <div class="col-sm-3" style="text-align:center;" ng-repeat="module in pin.entries">
       <div class="outer">
         <div class="inner">
+          
           <button type="button" ng-click="like()" >
               <h2><i class="fa fa-chevron-up"></i>
-              {{pin.entries.likes}}</h2>
+              {{module.likes}}</h2>
           </button>
           <button type="button" ng-click="dislike()" >
               <h2><i class="fa fa-chevron-down"></i>
-              {{countDislike}}</h2>
+              {{module.dislikes}}</h2>
           </button>
         </div>
       </div>
     </div>
-    <!-- 7 Videos -->
-    <!-- 3 Videos -->
-    <!--
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    -->
+    
   </div>
   </div>
 </div>

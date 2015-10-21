@@ -50,5 +50,19 @@ Pin.find({}).remove(function() {
       url: '/static/videos/0/cheese_id.mp4',
       thumbnail: '/static/thumbnails/cheese_id.png'
     });
+    Entry.create({
+      pin: id,
+      title: 'Hello world',
+      description: 'Some description',
+      url: '/static/videos/0/cheese_id.mp4',
+      thumbnail: '/static/thumbnails/cheese_id.png'
+    });
+    Entry.create({
+      pin: id,
+      title: 'Hello world',
+      description: 'Some description',
+      url: '/static/videos/0/cheese_id.mp4',
+      thumbnail: '/static/thumbnails/cheese_id.png'
+    });
   });
 });
