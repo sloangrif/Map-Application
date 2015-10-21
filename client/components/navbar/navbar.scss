@@ -50,3 +50,17 @@
     border-top-color: #FFF;
     border-bottom-color: #FFF;
 }
+
+.menu-icon {
+
+    padding: 10px 20px;
+    
+    color: #FAFAFA;
+    cursor: pointer;
+    float: left;
+    margin: 6px 6px 0 0;
+    border-radius: 5px;
+}
+#menuToggle { display: none; }
+
+#menuToggle:checked ~ .menu { position: absolute; left: 0; }
