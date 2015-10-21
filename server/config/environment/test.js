@@ -5,6 +5,6 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/mapn-test'
+    uri: process.env.TEST_MONGODB || 'mongodb://localhost/mapn-test'
   }
 };
