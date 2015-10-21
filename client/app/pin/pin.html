@@ -7,11 +7,11 @@
   <div class="row">
     <div class="col-md-10">
     <h2>{{error}}</h2>
-      <div class = "col-lg-6">
+      <div class = "col-sm-6">
         <img class="img-circle" src = "/assets/images/cheese.png" alt= "failed"
        	style = "width:200px;height:200px; float:right;">
       </div>  
-      <div class = "col-lg-6">
+      <div class = "col-sm-6">
         <h1> {{pin.name}} </h1>
         <p>{{pin.description}} </p>
       </div>
@@ -41,13 +41,16 @@
         <span aria-hidden="true"></span>
       </button>
     </div>
+    
+    <pre>{{pin | json}}</pre>s
+    
     <!-- Likes -->
-    <div class="col-sm-3 col-xs-6" style="text-align:center;">
+    <div class="col-sm-3" style="text-align:center;" ng-repeat="module in pin.entries">
       <div class="outer">
         <div class="inner">
           <button type="button" ng-click="like()" >
               <h2><i class="fa fa-chevron-up"></i>
-              {{countLike}}</h2>
+              {{pin.entries.likes}}</h2>
           </button>
           <button type="button" ng-click="dislike()" >
               <h2><i class="fa fa-chevron-down"></i>
@@ -58,6 +61,7 @@
     </div>
     <!-- 7 Videos -->
     <!-- 3 Videos -->
+    <!--
     <div class="col-sm-3 col-xs-6">
       <img src="/assets/images/demo.png" alt="demo"
       style = "width:260px; height:150px;">
@@ -65,49 +69,7 @@
         <font size="4"> Title</font>
       </div>
     </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <!-- 4 Videos -->
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:262px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
+    -->
   </div>
   </div>
 </div>
