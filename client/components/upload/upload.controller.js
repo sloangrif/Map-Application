@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('UploadCtrl', function ($scope, Upload, $stateParams, $modalInstance, $timeout, $window, $http, file) {
+  .controller('UploadCtrl', function ($scope, Upload, $stateParams, $modalInstance, $timeout, $window, $http, file, pin, errors) {
     $scope.modal = {pin: $stateParams.id}; // default
     $scope.file = file;
-    console.log(file);
     $scope.progress = {
       value: 0,
       type: 'success'
     };
-    $scope.loading = false;
+    $scope.uploading = false;
+    $scope.pin = pin;
+    $scope.errors = errors || [];
 
     $scope.map = { center: { latitude: 0, longitude: 0 }, zoom: 14 };
 
@@ -25,8 +26,26 @@ angular.module('mapnApp')
           'longitude': pin.coordinates[1]
         }];
       }, function(error) {
-        $scope.error = error.status + '\t' + error.statusText;
+        $scope.errors.push({'$error':error.status, '$errorParam':error.statusText});
     });
+
+    $scope.getErrorMsg = function(errors) {
+      var errMsg = '';
+      if (errors.length > 0) {
+        errors.forEach(function(error) {
+          if (error.$error === 'pattern') {
+            errMsg += 'You must choose a video to upload\n';
+          }
+          else {
+            errMsg += error.$error + '\t' + error.$errorParam + '\n';
+          }
+        });
+      }
+      else {
+        return;
+      }
+      return errMsg;
+    }
 
     $scope.submit = function(form) {
       if (form.file.$valid && $scope.file) {
@@ -35,11 +54,11 @@ angular.module('mapnApp')
     };
 
     $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
+      $modalInstance.close('cancel');
     };
 
     $scope.upload = function(file, errFiles) {
-      $scope.loading = true;
+      $scope.uploading = true;
       file.upload = Upload.upload({
           url: '/api/entries/',
           method: 'POST',
@@ -54,7 +73,7 @@ angular.module('mapnApp')
           if (response.status > 0) {
               $scope.errorMsg = response.status + ': ' + response.data;
               $scope.progress.type = 'warning';
-              $scope.loading = false;
+              $scope.uploading = false;
           }
       }, function (evt) {
           file.progress = Math.min(100, parseInt(100.0 *

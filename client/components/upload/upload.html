@@ -1,53 +1,83 @@
 <link rel="stylesheet" href="upload/upload.scss">
 
-<div class="modal-header">
-  <h3 class="modal-title">Upload a video</h3>
-   <ui-gmap-google-map center='map.center' zoom='map.zoom' id="angular-google-map-upload">
-          <ui-gmap-markers models="markers" coords="'self'" click="onClick">
-          </ui-gmap-markers>
-        </ui-gmap-google-map>
+<div class="modal-header upload-top">
+<div class="row">
+  <div class="col-xs-2">
+    <button class="btn btn-default pull-left" type="button"ng-click="cancel()">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+  </div>
+  <div class="col-xs-8">
+    <h4 class="modal-title text-center">Upload a video</h4>
+  </div>
+  <div class="col-xs-2">
+    <button class="btn btn-primary pull-right" type="button" ng-click="submit(form)" ng-disabled="loading">
+      <i class="fa fa-check"></i>
+    </button>
+  </div>
+  </div>
 </div>
 
 <div class="modal-body">
 
   <div class="row">
-    <div class="alert alert-danger" role="alert" ng-show="errFile.$error">
-      <h4>Error</h4>
-      {{errFile.$error}}: {{errFile.$errorParam}}
-    </div>
+    <progressbar value="progress.value" type="progress.type"
+                   class="progress-striped upload-progress"
+                   ng-class="{'invisible': !uploading}">
+    </progressbar>
   </div>
 
-
-  <form class="form" name="form">
+  <form class="form upload-form" name="form">
+    <div class="form-group alert alert-danger" ng-show="errors.length > 0">
+      {{getErrorMsg(errors)}}
+    </div>
+    <div class="form-group">
+      <div class="col-xs-2 col-sm-1 text-right">
+        <i class="fa fa-map-marker"></i>
+      </div>
+      <div class="col-xs-10 col-sm-11">
+        <strong>{{pin.name}}</strong>
+      </div>
+    </div>
 
     <div class="form-group">
+      <div class="col-xs-2 col-sm-1 text-right">
+        <i class="fa fa-commenting"></i>
+      </div>
+      <div class="col-xs-10 col-sm-11">
         <textarea  class="form-control" id="desc" ng-model="modal.description"
-        placeholder="Say something..."/>
+        placeholder="Write a caption">
+        </textarea>
+      </div>
     </div>
 
     <div class="form-group">
-      <button class="btn btn-primary" type="file" ngf-select ng-model="file" name="file"
-          accept="video/*" ngf-max-size="10MB"
-          ngf-max-duration="20" capture>
-        Change Video
-      </button>
-      <code>{{file.name}}</code>
+      <div class="col-xs-2 col-sm-1 text-right">
+        <i class="fa fa-file-video-o"></i>
+      </div>
+      <div class="col-xs-10 col-sm-11">
+        <button class="btn btn-sm btn-primary"
+                type="file" ngf-select
+                ng-model="file" name="file"
+                ngf-model-invalid="errors"
+                ngf-pattern="'video/*'"
+                ngf-max-size="10MB"
+                ngf-max-duration="15"
+                ngf-capture="'camera'"
+          >
+          {{file.name || 'Upload File'}}
+        </button>
+      </div>
     </div>
 
     <div class="form-group">
-      <video controls ngf-src="file" width="100%"></video>
+      <div class="col-xs-2 col-sm-1 text-right">
+        <i class="fa fa-play"></i>
+      </div>
+      <div class="col-xs-10 col-sm-11">
+        <video controls ngf-src="file" style="display: block; width: 100%"></video>
+      </div>
     </div>
 
   </form>
-
-  <progressbar value="progress.value" class="progress-striped" type="progress.type">
-    {{progress.value}}
-  </progressbar>
-
-  {{errorMsg}}
-</div>
-
-<div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="submit(form)" ng-disabled="loading">Upload</button>
-  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
 </div>
