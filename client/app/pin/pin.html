@@ -27,13 +27,19 @@
     <!-- Upload button -->
     <!-- Filter Search -->
     <div class="col-sm-1">
-      <button class="btn btn-primary" type="button" ng-click="addItem()" style= "float:right;" >
-          Upload
-        <span aria-hidden="true"></span>
+      <button class="btn btn-primary"
+             type="file"
+             ngf-select="addItem($file, $invalidFiles)"
+             ngf-capture="'camera'"
+             ngf-pattern="'video/*'"
+             ngf-max-size="10MB"
+             ngf-max-duration="15"
+             ng-disabled="!isLoggedIn">
+        <i class="fa fa-video-camera"></i>
       </button>
     </div>
     <div class="col-sm-1">
-      <button class="btn btn-primary" type="button" ng-click="addItem()" style= "float:right;" >
+      <button class="btn btn-primary" type="button" ng-click="addItem()" style= "float: right;" >
           Filter
         <span aria-hidden="true"></span>
       </button>
