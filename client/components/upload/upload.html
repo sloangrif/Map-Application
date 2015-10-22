@@ -21,9 +21,8 @@
 <div class="modal-body">
 
   <div class="row">
-    <progressbar value="progress.value" type="{{progress.type}}"
-                   class="progress-striped upload-progress"
-                   ng-class="{'invisible': !uploading}">
+    <progressbar value="progress.value" type="{{progress.type}}" active="progress.active"
+                   class="progress-striped upload-progress" ng-class="{'invisible': !uploading}">
     </progressbar>
   </div>
 
@@ -61,8 +60,8 @@
                 ng-model="file" name="file"
                 ngf-model-invalid="errors"
                 ngf-pattern="'video/*'"
-                ngf-max-size="10MB"
-                ngf-max-duration="15"
+                ngf-max-size="50MB"
+                ngf-max-duration="20"
                 ngf-capture="'camera'"
           >
           {{file.name || 'Upload File'}}

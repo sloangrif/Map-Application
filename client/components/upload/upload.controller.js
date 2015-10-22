@@ -55,8 +55,9 @@ angular.module('mapnApp')
               $modalInstance.close('done')
           }, 1000);
       }, function (response) {
+          console.log('error:', response);
           if (response.status > 0) {
-              $scope.errorMsg = response.status + ': ' + response.data;
+              $scope.errors.push({'$error':response.status, '$errorParam':response.statusText});
               $scope.progress.type = 'warning';
               $scope.uploading = false;
               $scope.progress.value = 100;
@@ -64,6 +65,7 @@ angular.module('mapnApp')
       }, function (evt) {
           file.progress = Math.min(100, parseInt(100.0 *
                                    evt.loaded / evt.total));
+          console.log(evt);
           $scope.progress.value = file.progress;
       });
     }
