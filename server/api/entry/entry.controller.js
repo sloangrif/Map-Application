@@ -146,42 +146,42 @@ exports.create = function(req, res) {
   var videoFile = id + '.mp4';
   var screenshotFile = id + '.png';
 
-  //Convert video and take a screenshot
-  var proc = new ffmpeg(file.path)
-  .takeScreenshots({
-      filename: screenshotFile,
-      count: 1,
-      size: '250x250'
-    }, basePath, function(err) {
-      if(err) {
-        console.log('An error occurred with ffmpeg: ' + err.message);
-      }
-  })
-  .output(basePath + '/' + videoFile)
-  .size('640x?')
-  .aspect('4:3')
-  .audioCodec('libmp3lame')
-  .audioQuality(0)
-  .videoCodec('libx264')
-  .videoBitrate(1000)
-  .on('error', function(err) {
-    if (err) {
-      console.log('An error occurred with ffmpeg: ' + err.message);
-    }
-  })
-  .on('end', function() {
-    fs.unlink(file.path);   // delete temp file
-    console.log('Finished processing video: ' + videoFile);
-  });
-
-
   req.body.video = "/static/" + videoFile;
-  req.body.thumbnail = "/static/" + screenshotFile;
+  req.body.thumbnail = "/static/mapn/uploading.png";
   req.body.created_by = req.user._id;
 
   // TODO make sure the pin exists..
   Entry.create(req.body, function(err, entry) {
     if(err) { return handleError(res, err); }
+    //Convert video and take a screenshot
+    var proc = new ffmpeg(file.path)
+    .takeScreenshots({
+        filename: screenshotFile,
+        count: 1,
+        size: '250x250'
+      }, basePath, function(err) {
+        if(err) {
+          console.log('An error occurred with ffmpeg: ' + err.message);
+        }
+    })
+    .output(basePath + '/' + videoFile)
+    .size('640x?')
+    .aspect('4:3')
+    .audioCodec('libmp3lame')
+    .audioQuality(0)
+    .videoCodec('libx264')
+    .videoBitrate(1000)
+    .on('error', function(err) {
+      if (err) {
+        console.log('An error occurred with ffmpeg: ' + err.message);
+      }
+    })
+    .on('end', function() {
+      entry.thumbnail = "/static/" + screenshotFile;
+      entry.save();
+      fs.unlink(file.path);   // delete temp file
+      console.log('Finished processing video: ' + videoFile);
+    });
     return res.status(201).json(entry);
   });
 };
