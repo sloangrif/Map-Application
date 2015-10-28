@@ -10,10 +10,11 @@ angular.module('mapnApp')
 
       if(form.$valid) {
         Auth.createUser({
-          name: $scope.user.name,
+          firstname: $scope.user.firstname,
+          lastname: $scope.user.lastname,
           phone: $scope.user.phone,
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
         })
         .then( function() {
           // Account created, redirect to home
