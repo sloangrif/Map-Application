@@ -3,6 +3,8 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 @import 'font-awesome/scss/font-awesome';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 
 /**
  * App-wide Styles
@@ -15,6 +17,8 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+
+
 * { padding: 0; margin: 0; }
 body { font-family: Open Sans; }
 a { text-decoration: none;  }
@@ -24,67 +28,248 @@ header {
 	width: 100%; 
 	height: 50px; 
 	margin: auto;
+	
 	/*border-bottom: 1px solid #EEE;*/
 	
 }
 
 
-nav { width: 100%; text-align: left;  }
+nav { 
+	width: 100%; 
+	height: 95vh;
+	text-align: left;  
+	position: relative;
+	
+}
+
 nav a { 
 	display: block; 
-	padding: 30px 20px;
+	padding: 4vh 4vh;
 	border-bottom: 1px solid #dedede;
 	color: #727272;
+	font-size: 2vh;
 }
+nav li:last-child a { border-bottom: none; }
+
 #title {
 	display: block; 
-	padding: 30px 20px;
+	padding: 5vh 4vh;
 	border-bottom: .5px solid #727272;
 	color: #444444;
-	font-size: 16px;
+	font-size: 2.5vh;
 }
-#signout a{
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	background-color: #ef6e5d;
-	color: #fdebe7 !important;
-	text-align: center;
-	font-size: 16px;
-	padding: 16px 20px;
-}
+
+
 /*nav a:hover { background: #E5DAC0 color: #f37254; }*/
 nav li:last-child a { border-bottom: none; }
 
 /*-----------------------------------------*/
 
-.menu{
-	width: 260px;
-	height: 710px;
-	position: absolute;
-	background: #fffaf9 repeat-y 50% 0;
+.menu {
+	width: 28vw;
 	
-	left: -260px;
+	height: 98vh;
+	position: absolute;
+	background: #fffaf9 !important;
+	left: -28vw;
 	transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
 	-moz-transition: all .3s ease-in-out;
 	-ms-transition: all .3s ease-in-out;
 	-o-transition: all .3s ease-in-out;
-	
+
 }
 .menu-icon {
-
 	padding: 10px 20px;
-	
 	color: #FAFAFA;
 	cursor: pointer;
 	float: left;
 	margin: 6px 6px 0 0;
 	border-radius: 5px;
+
 }
 #menuToggle { display: none; }
 
 #menuToggle:checked ~ .menu { position: absolute; left: 0; }
+
+#signout_button {
+	width: 28vw;
+	
+	height: 10vh;
+	margin-top: 24vh;
+	position: relative;
+	background-color: #ef6e5d;
+}
+
+#signout a {
+	position: relative;
+	text-align: center;
+	font-size: 2.2vh;
+	color: #fdebe7;
+}
+.company-name {
+	position: absolute;
+	left: 48vw;
+	top: 1vh;
+	bottom: 1vh;
+	text-align:center;
+}
+.company-name span{
+	color: #fdebe7;
+	font-size: 1.7em;
+	font-style: italic;
+	position: static;
+	text-align:center;
+	
+  
+
+}
+@media (min-width: 1300px) and (max-width: 1920px) {
+    .menu {
+	width: 22vw;
+	
+	height: 98vh;
+	position: absolute;
+	background: #fffaf9 !important;
+	left: -22vw;
+	transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+
+}
+#signout_button {
+	width: 22vw;
+	
+	height: 10vh;
+	margin-top: 26vh;
+	position: relative;
+	
+}
+
+#signout a {
+	position: relative;
+	text-align: center;
+}
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+    .menu {
+	
+	width: 50vw;
+	height: 95vh;
+	position: absolute;
+	background: #fffaf9 !important;
+	left: -50vw;
+	transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+
+	}
+	#signout_button {
+	width: 50vw;
+	height: 10vh;
+	margin-top: 26vh;
+	position: relative;
+	
+}
+
+#signout a {
+	position: relative;
+	text-align: center;
+}
+.company-name {
+	position: absolute;
+	left: 44vw;
+	top: 1vh;
+	bottom: 1vh;
+	text-align:center;
+	
+	
+}
+}
+
+@media (min-width: 350px) and (max-width: 400px) {
+    .menu {
+	
+	width: 50vw;
+	height: 95vh;
+	position: absolute;
+	background: #fffaf9 !important;
+	left: -50vw;
+	transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+
+	}
+	#signout_button {
+	width: 50vw;
+	height: 10vh;
+	margin-top: 25vh;
+	position: relative;
+	}
+
+	#signout a {
+		position: relative;
+		text-align: center;
+	}
+	.company-name {
+	position: absolute;
+	left: 44vw;
+	text-align:center;
+	}
+	.company-name span{
+	
+	font-size: 1.5em;
+
+	}
+}
+
+@media (min-width: 300px) and (max-width: 350px) {
+    .menu {
+	
+	width: 50vw;
+	height: 95vh;
+	position: absolute;
+	background: #fffaf9 !important;
+	left: -50vw;
+	transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+
+	}
+	#signout_button {
+	width: 50vw;
+	height: 10vh;
+	margin-top: 25vh;
+	position: relative;
+	
+	}
+	.company-name {
+	
+	left: 44vw;
+	
+	}
+
+	#signout a {
+	position: relative;
+	text-align: center;
+	}
+	.company-name span{
+	
+	font-size: 1.5em;
+
+
+	}
+}
+
 
 // Component styles are injected through grunt
 // injector
