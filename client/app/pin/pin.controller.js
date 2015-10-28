@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('PinCtrl', function ($scope, $stateParams, $http) {
+  .controller('PinCtrl', function ($scope, $stateParams, $http, $modal, $timeout, Auth) {
     var id = $stateParams.id;
     $scope.pin = {'id': id};
     $scope.error = '';
 
-    $scope.countLike = 6;
-    $scope.countDislike = 3;
+    $scope.uploadOpen = false;
+    $scope.isLoggedIn = false;
+    Auth.isLoggedInAsync(function(loggedIn) {
+      $scope.isLoggedIn = loggedIn;
+    });
 
     $scope.like = function(entry){
       if(entry.score==0){
@@ -22,6 +25,36 @@ angular.module('mapnApp')
         entry.dislikes++;
       }
     }
+
+    $scope.addItem = function(file, errors) {
+      if (!$scope.uploading) {
+        $scope.uploading = true;
+        $timeout(function() {
+          var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'components/upload/upload.html',
+            controller: 'UploadCtrl',
+            resolve: {
+              file: function () {
+                return file;
+              },
+              pin: function() {
+                return $scope.pin;
+              },
+              errors: function() {
+                return errors;
+              }
+            }
+          });
+          modalInstance.result.then(function() {
+            $scope.uploading = false;
+          }, function() {
+            $scope.uploading = false;
+          });
+        },100);
+      }
+    };
+
     $http.get('/api/pins/'+id).
       then(function(response) {
         var pin = response.data;

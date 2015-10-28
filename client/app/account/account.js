@@ -13,6 +13,11 @@ angular.module('mapnApp')
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       })
+      .state('biz', {
+        url: '/biz',
+        templateUrl: 'app/account/signup/biz/biz.html',
+        controller: 'BizCtrl'
+      })
       .state('settings', {
         url: '/settings',
         templateUrl: 'app/account/settings/settings.html',

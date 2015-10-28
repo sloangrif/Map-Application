@@ -6,7 +6,8 @@ angular.module('mapnApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'ngFileUpload'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
