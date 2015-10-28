@@ -13,16 +13,24 @@ angular.module('mapnApp')
     });
 
     $scope.like = function(entry){
-      if(entry.score==0){
+      if(entry.score==0||entry.score==-1){
+        if(entry.score==-1){
+          entry.dislikes--;
+        }
         entry.score = 1;
         entry.likes++;
+        $http.post('/api/entries/' + entry._id + '/like');
       }
     }
 
     $scope.dislike = function(entry){
-      if(entry.score==0){
+      if(entry.score==0 || entry.score==1){
+        if(entry.score==1){
+          entry.likes--;
+        }
         entry.score = -1;
         entry.dislikes++;
+        $http.post('/api/entries/'+ entry.id + '/dislike');
       }
     }
 
