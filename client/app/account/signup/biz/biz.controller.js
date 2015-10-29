@@ -14,7 +14,7 @@ angular.module('mapnApp')
           lastname: $scope.user.lastname,
           phone: $scope.user.phone,
           email: $scope.user.email,
-          password: $scope.user.password,
+          password: $scope.user.password
         })
         .then( function() {
           // Account created, redirect to home
