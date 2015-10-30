@@ -6,12 +6,11 @@
   </div>
   <div class="row">
     <h3 class="biz-free">Create a free business owner account</h3>
-    <div class="col-sm-6 col-sm-offset-3 bordered">
+    <div class="col-sm-6 col-sm-offset-3 border">
       <form class="form-inline" name="form" ng-submit="register(form)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
-          <!-- <label>First Name</label> -->
 
           <input type="text" name="firstname" placeholder="First Name" class="form-control" ng-model="user.firstname"
                  required/>
@@ -22,7 +21,6 @@
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
-           <!-- <label>Last Name</label> -->
 
           <input type="text" name="lastname" placeholder="Last Name" class="form-control" ng-model="user.lastname"
                  required/>
@@ -36,7 +34,6 @@
       <form class="form" name="form" ng-submit="register(form)" novalidate>
         <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && submitted,
                                             'has-error': form.phone.$invalid && submitted }">
-          <!-- <label>Phone Number</label> -->
 
           <input type="tel" name="phone" placeholder="Phone Number" class="form-control" ng-model="user.phone"
           ng-pattern="/^(\([2-9]\d{2}\)\s?|[2-9]\d{2}-?)\d{3}-?\d{4}$/"
@@ -56,7 +53,6 @@
 
         <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
                                             'has-error': form.email.$invalid && submitted }">
-          <!-- <label>Email</label> -->
 
           <input type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email"
                  required
@@ -95,7 +91,11 @@
           </button>
         </div>
 
-        <hr>
+        <div class="sep">
+          <span class="sep2">
+            OR
+          </span>
+        </div>
         <div class="text-center">
           <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
             <i class="fa fa-facebook"></i> Connect with Facebook

@@ -18,3 +18,42 @@ $btnGithubBackgroundHighlight:      #ccc;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
+
+.biz-free {
+	color: grey;
+	text-align: center;
+	font-style: italic;
+	font-family: "Verdana", Geneva, sans-serif;
+	padding-top: 10px;
+}
+
+.border {
+	border-radius: 25px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #D66900;
+	padding: 35px;
+	margin-top: 25px;
+}
+
+.sep {
+	height: 1px; 
+	background-color: lightgrey; 
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.sep2 {
+	color: grey;
+	background-color: white;
+	position: relative;
+	top: -0.5em;
+	font-family: "Verdana", Geneva, sans-serif;
+	padding: 10px;
+}
+
+.account {
+	text-align: left;
+	margin-bottom: 75px;
+}
