@@ -67,10 +67,10 @@ nav li:last-child a { border-bottom: none; }
 
 .menu {
 	width: 28vw;
-	
 	height: 98vh;
 	position: absolute;
 	background: #fffaf9 !important;
+	margin-top: 8.5vh;
 	left: -28vw;
 	transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
@@ -127,11 +127,11 @@ nav li:last-child a { border-bottom: none; }
 @media (min-width: 1300px) and (max-width: 1920px) {
     .menu {
 	width: 22vw;
-	
 	height: 98vh;
 	position: absolute;
 	background: #fffaf9 !important;
 	left: -22vw;
+	margin-top: 6.5vh;
 	transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
 	-moz-transition: all .3s ease-in-out;
@@ -141,9 +141,8 @@ nav li:last-child a { border-bottom: none; }
 }
 #signout_button {
 	width: 22vw;
-	
 	height: 10vh;
-	margin-top: 26vh;
+	margin-top: 26.5vh;
 	position: relative;
 	
 }
@@ -156,11 +155,11 @@ nav li:last-child a { border-bottom: none; }
 
 @media (min-width: 400px) and (max-width: 600px) {
     .menu {
-	
 	width: 50vw;
 	height: 95vh;
 	position: absolute;
 	background: #fffaf9 !important;
+	margin-top: .5vh;
 	left: -50vw;
 	transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
@@ -172,7 +171,7 @@ nav li:last-child a { border-bottom: none; }
 	#signout_button {
 	width: 50vw;
 	height: 10vh;
-	margin-top: 26vh;
+	margin-top: 25vh;
 	position: relative;
 	
 }
@@ -186,10 +185,12 @@ nav li:last-child a { border-bottom: none; }
 	left: 44vw;
 	top: 1vh;
 	bottom: 1vh;
-	text-align:center;
-	
-	
+	text-align:center;	
 }
+.menu-icon {
+	margin-top: -5vh !important;
+}
+
 }
 
 @media (min-width: 350px) and (max-width: 400px) {
@@ -200,6 +201,7 @@ nav li:last-child a { border-bottom: none; }
 	position: absolute;
 	background: #fffaf9 !important;
 	left: -50vw;
+	margin-top: 1vh;
 	transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
 	-moz-transition: all .3s ease-in-out;
@@ -228,6 +230,9 @@ nav li:last-child a { border-bottom: none; }
 	font-size: 1.5em;
 
 	}
+	.menu-icon {
+	margin-top: -5vh !important;
+	}
 }
 
 @media (min-width: 300px) and (max-width: 350px) {
@@ -238,6 +243,7 @@ nav li:last-child a { border-bottom: none; }
 	position: absolute;
 	background: #fffaf9 !important;
 	left: -50vw;
+	margin-top: 0vh;
 	transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
 	-moz-transition: all .3s ease-in-out;
@@ -263,11 +269,11 @@ nav li:last-child a { border-bottom: none; }
 	text-align: center;
 	}
 	.company-name span{
-	
 	font-size: 1.5em;
-
-
 	}
+	.menu-icon {
+	margin-top: -8vh !important;
+	}	
 }
 
 
