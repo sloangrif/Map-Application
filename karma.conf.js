@@ -37,6 +37,7 @@ module.exports = function(config) {
       'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js',
       'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js',
       'client/bower_components/json3/lib/json3.js',
+      'client/bower_components/ng-file-upload/ng-file-upload.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       'client/bower_components/angular-scenario/angular-scenario.js',
       // endbower

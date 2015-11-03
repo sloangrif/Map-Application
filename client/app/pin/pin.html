@@ -4,109 +4,69 @@
 
 
 <div class="container">
-  <div class="row">
+  <div class="row" style="padding-bottom:30px;">
     <div class="col-md-10">
     <h2>{{error}}</h2>
-      <div class = "col-lg-6">
+      <div class = "col-sm-6">
         <img class="img-circle" src = "/assets/images/cheese.png" alt= "failed"
        	style = "width:200px;height:200px; float:right;">
       </div>  
-      <div class = "col-lg-6">
+      <div class = "col-sm-6">
         <h1> {{pin.name}} </h1>
         <p>{{pin.description}} </p>
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-lg-12 col-lg-offset-4">
-      <p></p>
-    </div>
-  </div>  
+<div class="table">
+  
   <!-- Video Section -->
-  <div class="row">
-    <!--  -->
-    <div class="col-sm-9">
+  <div class="row" style="padding-bottom:10px;">
+    <div class="col-sm-10">
        <font size="4">Videos</font>
     </div>
     <!-- Upload button -->
     <!-- Filter Search -->
-    <div class="col-sm-3">
-      <button class="btn btn-primary" type="button" ng-click="addItem()" style= "float:right" >
-          Upload
-        <span aria-hidden="true"></span>
+    <div class="col-sm-1">
+      <button class="btn btn-primary"
+             type="file"
+             ngf-select="addItem($file, $invalidFiles)"
+             ngf-capture="'camera'"
+             ngf-pattern="'video/*'"
+             ngf-max-size="10MB"
+             ngf-max-duration="15"
+             ng-disabled="!isLoggedIn">
+        <i class="fa fa-video-camera"></i>
       </button>
-      <button class="btn btn-primary" type="button" ng-click="addItem()" style= "float:right" >
+    </div>
+    <div class="col-sm-1">
+      <button class="btn btn-primary" type="button" ng-click="addItem()" style= "float: right;" >
           Filter
         <span aria-hidden="true"></span>
       </button>
     </div>
+    <!--
+    format to java script object (angular thing)
+    <pre>{{pin | json}}</pre>
+    ng-style="{'background':module.thumbnail}"
+    -->
+  </div>
+  <div class="row">  
     <!-- Likes -->
-    <div class="col-sm-3 col-xs-6" style="text-align:center;">
-      <div class="outer">
-        <div class="inner">
-          <button type="button" ng-click="like()" >
-              <h2><i class="fa fa-chevron-up"></i>
-              {{countLike}}</h2>
+    <div class="col-sm-3"  style="text-align:center; margin-bottom:10px;" ng-repeat="module in pin.entries">
+      <div class="outer" ng-style="{'background-image':'url({{module.thumbnail}})'}">
+        <div class="inner" style="vertical-align:middle;">
+          <button type="button" ng-click="like(module)" >
+        	<button type="button" ng-click="like(module)" >
+			<h2><i class="fa fa-chevron-up"></i>
+              {{module.likes}}</h2>
           </button>
-          <button type="button" ng-click="dislike()" >
+          <button type="button" ng-click="dislike(module)">
               <h2><i class="fa fa-chevron-down"></i>
-              {{countDislike}}</h2>
+              {{module.dislikes}}</h2>
           </button>
         </div>
       </div>
     </div>
-    <!-- 7 Videos -->
-    <!-- 3 Videos -->
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <!-- 4 Videos -->
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:262px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
-    <div class="col-sm-3 col-xs-6">
-      <img src="/assets/images/demo.png" alt="demo"
-      style = "width:260px; height:150px;">
-      <div class="caption">
-        <font size="4"> Title</font>
-      </div>
-    </div>
+  </div>
   </div>
 </div>
