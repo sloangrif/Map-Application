@@ -10,6 +10,7 @@ angular.module('mapnApp')
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
+    $scope.isBusiness = Auth.isBusiness;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
