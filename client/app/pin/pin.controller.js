@@ -62,6 +62,24 @@ angular.module('mapnApp')
         },100);
       }
     };
+  
+    $scope.openEntry = function(entry) {
+        $timeout(function() {
+          var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'components/entry/entry.html',
+            controller: 'EntryCtrl',
+            resolve: {
+              entry: function () {
+                return entry;
+              }
+            }
+          });
+          modalInstance.result.then(function() {
+          }, function() {
+          });
+        },100);
+      };
 
     $http.get('/api/pins/'+id).
       then(function(response) {
