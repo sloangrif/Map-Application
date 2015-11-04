@@ -1,11 +1,11 @@
 .logo {
-	max-width: 50px;
-	max-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
 }
 
 .navbar-default {
-	background-color: #D66900;
-	border-bottom-color: #F77900;
+    background-color: #ef6e5d;
+    border-bottom-color: #F77900;
 }
 
 /* Links */
@@ -26,16 +26,16 @@
 }
 
 .navbar-default .navbar-nav > li > ul {
-	background-color: #D66900;
+    background-color: #D66900;
 }
 .navbar-default .navbar-nav > li > ul > li > a{
-	color: #FFF;
+    color: #FFF;
 }
 
 /* Caret */
 .navbar-default .navbar-nav > .dropdown > a .caret {
-	border-top-color: #FFF;
-	border-bottom-color: #FFF;
+    border-top-color: #FFF;
+    border-bottom-color: #FFF;
 }
 
 .navbar-default .navbar-nav > .dropdown > a:hover .caret,
@@ -50,3 +50,23 @@
     border-top-color: #FFF;
     border-bottom-color: #FFF;
 }
+@media (min-width: 300px) and (max-width: 600px){
+    .navbar-nav{
+       text-align: center;
+       
+
+    }
+}
+.menu-icon {
+
+    padding: 10px 20px;
+    
+    color: #FAFAFA;
+    cursor: pointer;
+    float: left;
+    margin: 6px 6px 0 0;
+    border-radius: 5px;
+}
+#menuToggle { display: none; }
+
+#menuToggle:checked ~ .menu { position: absolute; left: 0; }

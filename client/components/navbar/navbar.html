@@ -2,23 +2,37 @@
 
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
   <div class="container-fluid">
-    <div class="navbar-header">
+     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/"><img src="/assets/images/logo.png" class="logo"></a>
-    </div>
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <!-- <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li> 
-      </ul> -->
+      
 
-      <ul class="nav navbar-nav navbar-right">
+    <div class="company-name">
+      <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a ng-href="{{item.link}}"><span>mapn</span></a></li> 
+    </div>
+    </div>
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle" class="menu-icon">&#9776;</label>
+      <nav class="menu">
+        <ul>
+            <li id="title">MY STUFF</li>
+              <li><a href="#">Account Settings</a></li>
+              <li><a href="#">My Money</a></li>
+              <li><a href="#">My Style</a></li>
+              <li><a href="#">Send Feedback</a></li>
+            <div id="signout_button">
+            <li id="signout"><a href="#">Sign Out</a></li> 
+            </div>
+          </ul>
+      </nav>
+      
+      <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
         <li class="dropdown" ng-show="isLoggedIn()">
@@ -33,6 +47,20 @@
         </li>
       </ul>
 
+       <header>
+        <div id="brand"></div>
+      </header>
+
+      
+
+              
+
+
+
+
+
+
+  <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <div class="col-sm-3 col-md-3 pull-right" ng-show="isLoggedIn()">
         <form class="navbar-form" role="search">
         <div class="input-group">
@@ -43,6 +71,7 @@
         </div>
         </form>
         </div>
+      </div>
     </div>
   </div>
 </div>
