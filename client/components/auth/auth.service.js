@@ -137,6 +137,15 @@ angular.module('mapnApp')
       },
 
       /**
+       * Check if a user is a business
+       *
+       * @return {Boolean}
+       */
+      isBusiness: function() {
+        return currentUser.role === 'analytics';
+      },
+
+      /**
        * Get auth token
        */
       getToken: function() {
