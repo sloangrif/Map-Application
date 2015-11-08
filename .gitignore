@@ -8,3 +8,4 @@ dist
 /server/config/local.env.js
 /server/static/*
 npm-debug.log
+**/.DS_Store
