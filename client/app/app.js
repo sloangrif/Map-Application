@@ -7,7 +7,8 @@ angular.module('mapnApp', [
   'ui.router',
   'ui.bootstrap',
   'uiGmapgoogle-maps',
-  'ngFileUpload'
+  'ngFileUpload',
+  '720kb.socialshare'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

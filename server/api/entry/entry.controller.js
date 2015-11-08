@@ -78,15 +78,14 @@ exports.index = function(req, res) {
 
 // Get a single entry
 exports.show = function(req, res) {
-  Entry.findById(req.params.id, function (err, entry) {
+  Entry.findById(req.params.id).lean().exec(function (err, entry) {
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
-    // Don't return scores
-    var response = entry.toObject();
+    if (entry.votes) { delete entry.votes; } // dont return vote array
+    if (!req.user) { return res.json(entry); } // user not logged in
     var userId = req.user._id;
-    delete reponse.votes;
-    response.score = getUserScore(userId,entry);
-    return res.json(response);
+    if (userId) { entry.score = getUserScore(userId,entry); }
+    return res.json(entry);
   });
 };
 
@@ -145,6 +144,7 @@ exports.create = function(req, res) {
 
   var videoFile = id + '.mp4';
   var screenshotFile = id + '.png';
+  var wmimage = basePath + '/mapn/logo.png';
 
   req.body.video = "/static/" + videoFile;
   req.body.thumbnail = "/static/mapn/uploading.png";
@@ -171,9 +171,10 @@ exports.create = function(req, res) {
     .audioQuality(0)
     .videoCodec('libx264')
     .videoBitrate(1000)
-    .on('error', function(err) {
+    .addOption('-vf', 'movie='+wmimage+ ' [watermark]; [in] [watermark] overlay=0:0 [out]')
+    .on('error', function(err, stdout, stderr) {
       if (err) {
-        console.log('An error occurred with ffmpeg: ' + err.message);
+        console.log('An error occurred with ffmpeg: ' + err.message, stdout, stderr);
       }
     })
     .on('end', function() {

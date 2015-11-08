@@ -8,6 +8,7 @@
     "angular-google-maps": "~2.2.1",
     "angular-resource": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",
+    "angular-socialshare": "angularjs-socialshare#~0.1.14",
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.1.1",
     "bootstrap-sass-official": "~3.1.1",
