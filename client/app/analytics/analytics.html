@@ -1,3 +1,15 @@
-<div class="col-md-12">
-This is the analytics view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12"><h2>Pins</h2></div>
+		<div class="col-md-12">
+  			<ul class="list-group">
+    			<li class="list-group-item" ng-repeat="pin in pins">
+        		<strong>{{pin.name}}</strong><br>
+       			<span class="text-muted">{{pin.description}}</span>
+    			</li>
+  			</ul>
+  		</div>
+	</div>
 </div>

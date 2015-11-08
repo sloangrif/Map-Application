@@ -36,9 +36,17 @@ User.find({}).remove(function() {
     phone: '2345678902',
     email: 'admin@admin.com',
     password: 'admin'
-  }, function() {
+  }),
+  User.create({
+    provider: 'local',
+    role: 'analytics',
+    name: 'Analytics',
+    phone: '2345678903',
+    email: 'test2@test.com',
+    password: 'test'
+  }), function() {
       console.log('finished populating users');
-  });
+  };
 });
 
 Entry.find({}).remove();
