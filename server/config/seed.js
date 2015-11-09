@@ -59,7 +59,7 @@ Pin.find({}).remove(function() {
     description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
     coordinates: [29.651634, -82.324826],
     hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant'],
-    thumbnail: '/static/test/cheese_id.png'
+    thumbnail: '/static/mapn/cheese.png'
   }, function(err, pin) {
     if(err) {
       console.warn(err);
