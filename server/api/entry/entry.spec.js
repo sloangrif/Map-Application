@@ -4,19 +4,18 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 
-describe('GET /api/entries', function() {
+// describe('GET /api/entries', function() {
 
-it('should respond with an error', function(done) {
-     request(app)
-       .get('/api/entries')
-       .expect(400)
-       .expect('Content-Type', /json/)
-       .end(function(err, res) {
-         if (err) return done(err);
-         done();
-       });
-   });
- });
+// it('should respond with an error', function(done) {
+//      request(app)
+//        .get('/api/entries')
+//        .expect(400)
+//        .end(function(err, res) {
+//          if (err) return done(err);
+//          done();
+//        });
+//    });
+//  });
 
 /*
 it('should respond with a JSON array', function(done) {

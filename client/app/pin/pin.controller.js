@@ -13,7 +13,7 @@ angular.module('mapnApp')
     });
 
     $scope.like = function(entry){
-      if(entry.score==0||entry.score==-1){
+      if(entry.score != 1){
         if(entry.score==-1){
           entry.dislikes--;
         }
@@ -24,7 +24,7 @@ angular.module('mapnApp')
     };
 
     $scope.dislike = function(entry){
-      if(entry.score==0 || entry.score==1){
+      if(entry.score != -1){
         if(entry.score==1){
           entry.likes--;
         }
@@ -65,10 +65,11 @@ angular.module('mapnApp')
     };
 
     $scope.openEntry = function(entry) {
-      console.log(entry);
       $state.go('pin.entry', {'entryid': entry._id});
     };
 
+    //TODO MOVE THIS TO SERVICE
+    // allow for communication between pin & entry
     $http.get('/api/pins/'+id).
       then(function(response) {
         var pin = response.data;

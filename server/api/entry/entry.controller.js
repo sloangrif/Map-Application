@@ -22,6 +22,7 @@ var getUserScore = function(userId, entry) {
 // Get list of entries
 exports.index = function(req, res) {
   var date = new Date(0);
+  console.log(req.user);
   req.user = req.user || {};
   var userId = req.user._id;
   req.query.limit = req.query.limit || 25;
@@ -68,7 +69,8 @@ exports.index = function(req, res) {
     var response = [];
     entries.forEach(function(entry) {
       var tempEntry = entry.toObject();
-      tempEntry.score = getUserScore(userId, entry);
+      tempEntry.score = getUserScore(userId, tempEntry);
+
       delete tempEntry.votes;
       response.push(tempEntry);
     });
@@ -127,7 +129,6 @@ exports.dislike = function(req, res) {
       entry.votes.push({'user_id': userId, 'score': -1});
     }
     entry.save();
-    console.log(entry);
 
     return res.status(200);
   });
@@ -167,7 +168,7 @@ exports.create = function(req, res) {
     .output(basePath + '/' + videoFile)
     .size('640x?')
     .aspect('4:3')
-    .audioCodec('libmp3lame')
+    .audioCodec('aac')
     .audioQuality(0)
     .videoCodec('libx264')
     .videoBitrate(1000)
@@ -206,7 +207,8 @@ exports.destroy = function(req, res) {
   Entry.findById(req.params.id, function (err, entry) {
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
-    if (req.user._id !== entry.created_by || req.user.role !== 'admin') {
+    // Check if user is admin or owns this entry
+    if (!(req.user.role.toString() === 'admin' || req.user._id.toString() === entry.created_by.toString())) {
       return res.status(403).send('You must own this entry or be admin');
     }
     entry.remove(function(err) {
