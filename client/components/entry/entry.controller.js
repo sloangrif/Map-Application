@@ -13,6 +13,12 @@ angular.module('mapnApp')
     $scope.page = $location.path();
 
     $scope.getUrl = function(path) {
-      return $location.host() + path;
+      return $location.protocol() + "://" + $location.host() + path;
     }
+
+    $scope.getText = function(text) {
+      return text + ' via mapn.mobi'
+    }
+
+
 });

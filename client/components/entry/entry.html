@@ -13,18 +13,67 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <ul>
+      <ul class="list-inline share">
         <li>Share</li>
         <li>
           <a href="#"
             socialshare
             socialshare-provider="facebook"
-            socialshare-text="Mapn"
+            socialshare-type="feed"
+            socialshare-via="747888788691053"
+            socialshare-to=""
+            socialshare-from=""
+            socialshare-ref=""
+            socialshare-display="popup"
             socialshare-media="{{getUrl(entry.video)}}"
-            socialshare-url="{{getUrl(page)}}">
+            socialshare-source=""
+            socialshare-description="{{entry.description}}"
+            socialshare-text="{{entry.description}}"
+            socialshare-picture="{{getUrl(entry.thumbnail)}}"
+            socialshare-caption="Mapn"
+            socialshare-url="{{getUrl(page)}}"
+            socialshare-redirect-uri="{{getUrl(page)}}">
             <button class="btn btn-md btn-default">
               <i class="fa fa-facebook-official"></i>
               Facebook
+            </button>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            socialshare
+            socialshare-provider="twitter"
+            socialshare-text="{{getText(entry.description)}}"
+            socialshare-url="{{getUrl(page)}}">
+            <button class="btn btn-md btn-default">
+              <i class="fa fa-twitter"></i>
+              Twitter
+            </button>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            socialshare
+            socialshare-provider="pinterest"
+            socialshare-text="{{getText(entry.description)}}"
+            socialshare-media="{{getUrl(entry.thumbnail)}}"
+            socialshare-url="{{getUrl(page)}}">
+            <button class="btn btn-md btn-default">
+              <i class="fa fa-pinterest"></i>
+              Pinterest
+            </button>
+          </a>
+        </li>
+         <li>
+          <a href="#"
+            socialshare
+            socialshare-provider="tumblr"
+            socialshare-text="{{getText(entry.description)}}"
+            socialshare-media="{{getUrl(entry.video)}}"
+            socialshare-url="{{getUrl(page)}}">
+            <button class="btn btn-md btn-default">
+              <i class="fa fa-tumblr"></i>
+              Tumblr
             </button>
           </a>
         </li>

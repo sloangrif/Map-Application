@@ -13,9 +13,8 @@ var PinSchema = new Schema({
   created_on: { type: Date, default: Date.now },
   created_by: { type: Schema.Types.ObjectId, required: false}, //TODO require true
   entries: [Schema.Types.ObjectId],
-  bounties: [Schema.Types.ObjectId]
+  bounty: Schema.Types.ObjectId
 });
-
 
 PinSchema.
   path('coordinates').

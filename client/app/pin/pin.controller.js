@@ -78,6 +78,16 @@ angular.module('mapnApp')
           }, function(error) {
             $scope.error = error.status + '\t' + error.statusText;
           });
+        if (pin.bounty) {
+          $http.get('/api/bounties/'+pin.bounty).
+            then(function(response) {
+              pin.bounty = response.data;
+            }, function(error) {
+              $scope.error = error.status + '\t' + error.statusText;
+            });
+        }
+
+
       }, function(error) {
         $scope.error = error.status + '\t' + error.statusText;
     });
