@@ -1,7 +1,48 @@
-h1{
-    text-align: center;
+.img-circle{
+  border-radius: 50%;
 }
-h3{
-    
-    text-align: center;
+.outer{
+  position: relative;
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /*background-color: gray;*/
+}
+.inner{
+  position: absolute;
+  top: 0;
+  background-color:rgba(0,0,0,0.1);
+  /*transform: translateY(-50%);*/
+  width: 100%;
+  height:150px;
+  opacity: 0;
+  vertical-align: middle;
+  line-height: 150px;
+  /*look up animations*/
+}
+.inner:hover{
+  opacity: 1;
+}
+button{
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+.table{
+  background-color: ghostwhite;
+
+  padding: 20px;
+
+}
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+.bounty {
+  background: #eee;
+  padding-bottom: 1em;
 }
