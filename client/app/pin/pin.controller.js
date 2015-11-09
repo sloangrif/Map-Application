@@ -30,7 +30,7 @@ angular.module('mapnApp')
         }
         entry.score = -1;
         entry.dislikes++;
-        $http.post('/api/entries/'+ entry.id + '/dislike');
+        $http.post('/api/entries/'+ entry._id + '/dislike');
       }
     };
 
@@ -63,26 +63,9 @@ angular.module('mapnApp')
         },100);
       }
     };
-  
-    $scope.openEntry = function(entry) {
-        $timeout(function() {
-          var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'components/entry/entry.html',
-            controller: 'EntryCtrl',
-            resolve: {
-              entry: function () {
-                return entry;
-              }
-            }
-          });
-          modalInstance.result.then(function() {
-          }, function() {
-          });
-        },100);
-      };
 
     $scope.openEntry = function(entry) {
+      console.log(entry);
       $state.go('pin.entry', {'entryid': entry._id});
     };
 
