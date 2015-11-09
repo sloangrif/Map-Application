@@ -3,75 +3,31 @@
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
   <div class="container-fluid">
      <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      
-
     <div class="company-name">
       <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}"><span>mapn</span></a></li> 
     </div>
     </div>
+    <div ng-show="isLoggedIn()">
       <input type="checkbox" id="menuToggle">
       <label for="menuToggle" class="menu-icon">&#9776;</label>
       <nav class="menu">
         <ul>
-            <li id="title">MY STUFF</li>
-              <li><a href="#">Account Settings</a></li>
-              <li><a href="#">My Money</a></li>
-              <li><a href="#">My Style</a></li>
-              <li><a href="#">Send Feedback</a></li>
-            <div id="signout_button">
-            <li id="signout"><a href="#">Sign Out</a></li> 
-            </div>
-          </ul>
+          <li ng-show="isAdmin()" id="title">ADMINISTRATION</li>
+            <li ng-show="isAdmin()"><a href="/admin">Manage Users</a></li>
+            <li ng-show="isAdmin()"><a href="#">Manage Pins</a></li>
+          <li ng-show="isBusiness()" id="title">MY BUSINESS</li>
+            <li ng-show="isBusiness()"><a href="/analytics">My Pins</a></li>
+            <li ng-show="isBusiness()"><a href="#">Claim Pins</a></li>
+          <li ng-show="isLoggedIn()" id="title">MY STUFF</li>
+            <li ng-show="isLoggedIn()"><a href="/settings">Account Settings</a></li>
+            <li ng-show="isLoggedIn()"><a href="#">My Money</a></li>
+            <li ng-show="isLoggedIn()"><a href="#">Send Feedback</a></li>
+          <div ng-show="isLoggedIn()" id="signout_button">
+          <li id="signout"><a href="" ng-click="logout()">Sign Out</a></li> 
+          </div>
+        </ul>
       </nav>
-      
-      <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li class="dropdown" ng-show="isLoggedIn()">
-          <a id="preferences" class="dropdown-toggle" date-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Hello {{ getCurrentUser().name }}
-          <span class="caret"></span></a>
-            <ul class="dropdown-menu" aria-labelledby="preferences">
-              <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Administration</a></li>
-              <li ng-show="isAdmin()" role="separator" class="divider"></li>
-              <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-              <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
-            </ul>
-        </li>
-      </ul>
-
-       <header>
-        <div id="brand"></div>
-      </header>
-
-      
-
-              
-
-
-
-
-
-
-  <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <div class="col-sm-3 col-md-3 pull-right" ng-show="isLoggedIn()">
-        <form class="navbar-form" role="search">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-        </form>
-        </div>
-      </div>
     </div>
   </div>
 </div>
