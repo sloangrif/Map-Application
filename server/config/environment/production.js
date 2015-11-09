@@ -22,5 +22,5 @@ module.exports = {
             'mongodb://localhost/mapn'
   },
 
-  seedDB: true
+  seedDB: false
 };
