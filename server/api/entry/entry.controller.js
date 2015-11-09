@@ -206,6 +206,9 @@ exports.destroy = function(req, res) {
   Entry.findById(req.params.id, function (err, entry) {
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
+    if (req.user._id !== entry.created_by || req.user.role !== 'admin') {
+      return res.status(403).send('You must own this entry or be admin');
+    }
     entry.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
