@@ -8,6 +8,8 @@
 var Pin = require('../api/pin/pin.model');
 var User = require('../api/user/user.model');
 var Entry = require('../api/entry/entry.model');
+var Bounty = require('../api/bounty/bounty.model');
+
 var fs = require('fs');
 var path = require('path');
 
@@ -50,13 +52,14 @@ User.find({}).remove(function() {
 });
 
 Entry.find({}).remove();
+Bounty.find({}).remove();
 Pin.find({}).remove(function() {
   Pin.create({
     name : 'Cheese Daddy',
     description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
     coordinates: [29.651634, -82.324826],
     hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant'],
-    thumbnail: '/static/test/cheese_id.png'
+    thumbnail: '/static/mapn/cheese.png'
   }, function(err, pin) {
     if(err) {
       console.warn(err);
@@ -70,19 +73,9 @@ Pin.find({}).remove(function() {
       video: '/static/test/2be7787f-ce48-40a9-a53e-1a53ffc421e2.mp4',
       thumbnail: '/static/test/2be7787f-ce48-40a9-a53e-1a53ffc421e2.png'
     });
-    Entry.create({
+    Bounty.create({
       pin: id,
-      title: 'Hello world',
-      description: 'Some description',
-      url: '/static/videos/0/cheese_id.mp4',
-      thumbnail: '/static/thumbnails/cheese_id.png'
-    });
-    Entry.create({
-      pin: id,
-      title: 'Hello world',
-      description: 'Some description',
-      url: '/static/videos/0/cheese_id.mp4',
-      thumbnail: '/static/thumbnails/cheese_id.png'
+      description: 'Create some video.'
     });
   });
 });

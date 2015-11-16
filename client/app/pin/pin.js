@@ -7,10 +7,31 @@ angular.module('mapnApp')
         url: '/pin/:id',
         templateUrl: 'app/pin/pin.html',
         controller: 'PinCtrl'
+      })
+      .state("pin.entry", {
+        //abstract: true,
+        parent: 'pin',
+        url: '/:entryid',
+        onEnter: function($stateParams, $state, $modal) {
+          var id = $stateParams.entryid;
+          var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'components/entry/entry.html',
+            controller: 'EntryCtrl',
+            resolve: {
+              id: function () {
+                return id;
+              }
+            }
+          });
+          modalInstance.result.finally(function() {
+            $state.go('^');
+          });
+        }
       });
   }
   /*
-  
+
 */
 
   );

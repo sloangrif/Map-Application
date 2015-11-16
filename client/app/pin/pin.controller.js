@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('PinCtrl', function ($scope, $stateParams, $http, $modal, $timeout, Auth) {
+  .controller('PinCtrl', function ($scope, $stateParams, $state, $http, $modal, $timeout, Auth) {
     var id = $stateParams.id;
     $scope.pin = {'id': id};
     $scope.error = '';
@@ -13,7 +13,7 @@ angular.module('mapnApp')
     });
 
     $scope.like = function(entry){
-      if(entry.score==0||entry.score==-1){
+      if(entry.score != 1){
         if(entry.score==-1){
           entry.dislikes--;
         }
@@ -21,18 +21,19 @@ angular.module('mapnApp')
         entry.likes++;
         $http.post('/api/entries/' + entry._id + '/like');
       }
-    }
+    };
 
     $scope.dislike = function(entry){
-      if(entry.score==0 || entry.score==1){
+      if(entry.score != -1){
         if(entry.score==1){
           entry.likes--;
         }
         entry.score = -1;
         entry.dislikes++;
-        $http.post('/api/entries/'+ entry.id + '/dislike');
+        $http.post('/api/entries/'+ entry._id + '/dislike');
       }
-    }
+    };
+
 
     $scope.addItem = function(file, errors) {
       if (!$scope.uploading) {
@@ -63,6 +64,12 @@ angular.module('mapnApp')
       }
     };
 
+    $scope.openEntry = function(entry) {
+      $state.go('pin.entry', {'entryid': entry._id});
+    };
+
+    //TODO MOVE THIS TO SERVICE
+    // allow for communication between pin & entry
     $http.get('/api/pins/'+id).
       then(function(response) {
         var pin = response.data;
@@ -73,6 +80,16 @@ angular.module('mapnApp')
           }, function(error) {
             $scope.error = error.status + '\t' + error.statusText;
           });
+        if (pin.bounty) {
+          $http.get('/api/bounties/'+pin.bounty).
+            then(function(response) {
+              pin.bounty = response.data;
+            }, function(error) {
+              $scope.error = error.status + '\t' + error.statusText;
+            });
+        }
+
+
       }, function(error) {
         $scope.error = error.status + '\t' + error.statusText;
     });

@@ -9,15 +9,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
+
 
     <div class="company-name">
       <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}"><span>mapn</span></a></li> 
+            <a ng-href="{{item.link}}"><span>mapn</span></a></li>
     </div>
     </div>
       <input type="checkbox" id="menuToggle">
-      <label for="menuToggle" class="menu-icon">&#9776;</label>
+      <label for="menuToggle" class="menu-icon">
+        <i class="fa fa-bars"></i>
+      </label>
       <nav class="menu">
         <ul>
             <li id="title">MY STUFF</li>
@@ -26,11 +28,11 @@
               <li><a href="#">My Style</a></li>
               <li><a href="#">Send Feedback</a></li>
             <div id="signout_button">
-            <li id="signout"><a href="#">Sign Out</a></li> 
+            <li id="signout"><a href="#" ng-click="logout()">Sign Out</a></li>
             </div>
           </ul>
       </nav>
-      
+
       <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
        <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
@@ -50,28 +52,6 @@
        <header>
         <div id="brand"></div>
       </header>
-
-      
-
-              
-
-
-
-
-
-
-  <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <div class="col-sm-3 col-md-3 pull-right" ng-show="isLoggedIn()">
-        <form class="navbar-form" role="search">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-        </form>
-        </div>
-      </div>
     </div>
   </div>
 </div>

@@ -22,6 +22,7 @@ var getUserScore = function(userId, entry) {
 // Get list of entries
 exports.index = function(req, res) {
   var date = new Date(0);
+  console.log(req.user);
   req.user = req.user || {};
   var userId = req.user._id;
   req.query.limit = req.query.limit || 25;
@@ -68,7 +69,8 @@ exports.index = function(req, res) {
     var response = [];
     entries.forEach(function(entry) {
       var tempEntry = entry.toObject();
-      tempEntry.score = getUserScore(userId, entry);
+      tempEntry.score = getUserScore(userId, tempEntry);
+
       delete tempEntry.votes;
       response.push(tempEntry);
     });
@@ -78,15 +80,14 @@ exports.index = function(req, res) {
 
 // Get a single entry
 exports.show = function(req, res) {
-  Entry.findById(req.params.id, function (err, entry) {
+  Entry.findById(req.params.id).lean().exec(function (err, entry) {
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
-    // Don't return scores
-    var response = entry.toObject();
+    if (entry.votes) { delete entry.votes; } // dont return vote array
+    if (!req.user) { return res.json(entry); } // user not logged in
     var userId = req.user._id;
-    delete reponse.votes;
-    response.score = getUserScore(userId,entry);
-    return res.json(response);
+    if (userId) { entry.score = getUserScore(userId,entry); }
+    return res.json(entry);
   });
 };
 
@@ -128,7 +129,6 @@ exports.dislike = function(req, res) {
       entry.votes.push({'user_id': userId, 'score': -1});
     }
     entry.save();
-    console.log(entry);
 
     return res.status(200);
   });
@@ -145,6 +145,7 @@ exports.create = function(req, res) {
 
   var videoFile = id + '.mp4';
   var screenshotFile = id + '.png';
+  var wmimage = basePath + '/mapn/logo.png';
 
   req.body.video = "/static/" + videoFile;
   req.body.thumbnail = "/static/mapn/uploading.png";
@@ -167,13 +168,14 @@ exports.create = function(req, res) {
     .output(basePath + '/' + videoFile)
     .size('640x?')
     .aspect('4:3')
-    .audioCodec('libmp3lame')
+    .audioCodec('aac')
     .audioQuality(0)
     .videoCodec('libx264')
     .videoBitrate(1000)
-    .on('error', function(err) {
+    .addOption('-vf', 'movie='+wmimage+ ' [watermark]; [in] [watermark] overlay=0:0 [out]')
+    .on('error', function(err, stdout, stderr) {
       if (err) {
-        console.log('An error occurred with ffmpeg: ' + err.message);
+        console.log('An error occurred with ffmpeg: ' + err.message, stdout, stderr);
       }
     })
     .on('end', function() {
@@ -205,6 +207,10 @@ exports.destroy = function(req, res) {
   Entry.findById(req.params.id, function (err, entry) {
     if(err) { return handleError(res, err); }
     if(!entry) { return res.status(404).send('Not Found'); }
+    // Check if user is admin or owns this entry
+    if (!(req.user.role.toString() === 'admin' || req.user._id.toString() === entry.created_by.toString())) {
+      return res.status(403).send('You must own this entry or be admin');
+    }
     entry.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');

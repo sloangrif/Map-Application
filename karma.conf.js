@@ -22,6 +22,7 @@ module.exports = function(config) {
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
       'client/bower_components/angular-resource/angular-resource.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
+      'client/bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/bootstrap/dist/js/bootstrap.js',
       'client/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js',

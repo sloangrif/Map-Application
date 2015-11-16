@@ -1,7 +1,40 @@
-h1{
-    text-align: center;
+.img-circle{
+  border-radius: 50%;
 }
-h3{
-    
-    text-align: center;
+.outer{
+  position: relative;
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /*background-color: gray;*/
+}
+.inner{
+  position: absolute;
+  top: 95;  /*transform: translateY(-50%);*/
+  width: 100%;
+  vertical-align: middle;
+  line-height: 150px;
+}
+button{
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+.table{
+  background-color: ghostwhite;
+
+  padding: 20px;
+
+}
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+.bounty {
+  background: #eee;
+  padding-bottom: 1em;
 }

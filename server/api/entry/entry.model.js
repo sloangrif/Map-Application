@@ -21,18 +21,19 @@ var EntrySchema = new Schema({
 });
 
 //TODO on update votes - increment likes/dislikes
-EntrySchema.post('save', function(entry) {
+EntrySchema.pre('save', function(next) {
   var countLikes = 0;
   var countDislikes = 0;
-  entry.votes.forEach(function(vote) {
+  this.votes.forEach(function(vote) {
     if (vote.score === 1) {
       countLikes++;
     }
-    else if (votes.score === -1) {
+    else if (vote.score === -1) {
       countDislikes++;
     }
   });
-  entry.likes = countLikes;
-  entry.dislikes = countDislikes;
+  this.likes = countLikes;
+  this.dislikes = countDislikes;
+  next();
 });
 module.exports = mongoose.model('Entry', EntrySchema);
