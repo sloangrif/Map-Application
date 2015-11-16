@@ -8,7 +8,8 @@ angular.module('mapnApp', [
   'ui.bootstrap',
   'uiGmapgoogle-maps',
   'ngFileUpload',
-  '720kb.socialshare'
+  '720kb.socialshare',
+  'vcRecaptcha'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

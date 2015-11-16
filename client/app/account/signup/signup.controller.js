@@ -8,11 +8,11 @@ angular.module('mapnApp')
     $scope.register = function(form) {
       $scope.submitted = true;
 
+      console.log(form);
+
       if(form.$valid) {
         Auth.createUser({
-          firstname: $scope.user.firstname,
-          lastname: $scope.user.lastname,
-          phone: $scope.user.phone,
+          name: $scope.user.firstname + ' ' +  $scope.user.lastname,
           email: $scope.user.email,
           password: $scope.user.password
         })
