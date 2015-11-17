@@ -3,70 +3,59 @@
     max-height: 50px;
 }
 
-.navbar-default {
-    background-color: #ef6e5d;
-    border-bottom-color: #F77900;
-}
+.navbar-mapn {
+    background-color: $color-primary;
+    border-bottom-color: darken($color-primary,5%);
+    color: #ddd;
 
-/* Links */
-.navbar-default .navbar-nav > li > a {
-    color: #FFF;
-}
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
-.navbar-default .navbar-nav > .active > a:focus {
-    color: #333;
-    background-color: #D66900;
-}
-.navbar-default .navbar-nav > .open > a, 
-.navbar-default .navbar-nav > .open > a:hover, 
-.navbar-default .navbar-nav > .open > a:focus {
-    color: #FFF;
-    background-color: #D66900;
-}
+    .dropdown-menu {
+      background-color: $color-primary;
+      color: #ddd;
 
-.navbar-default .navbar-nav > li > ul {
-    background-color: #D66900;
-}
-.navbar-default .navbar-nav > li > ul > li > a{
-    color: #FFF;
-}
+      a {
+          color: #eee;
+          background: none;
 
-/* Caret */
-.navbar-default .navbar-nav > .dropdown > a .caret {
-    border-top-color: #FFF;
-    border-bottom-color: #FFF;
-}
+          &:hover,
+          &:focus {
+            background-color: lighten($color-primary,10%);
+            color: #fff;
+          }
+      }
+    }
 
-.navbar-default .navbar-nav > .dropdown > a:hover .caret,
-.navbar-default .navbar-nav > .dropdown > a:focus .caret {
-    border-top-color: #333;
-    border-bottom-color: #333;
-}
+    .navbar-brand {
+      // background-color: lighten($color-primary, 10%);
+      color: #fff;
+      font-weight: bold;
+      padding: 5px;
 
-.navbar-default .navbar-nav > .open > a .caret, 
-.navbar-default .navbar-nav > .open > a:hover .caret, 
-.navbar-default .navbar-nav > .open > a:focus .caret {
-    border-top-color: #FFF;
-    border-bottom-color: #FFF;
-}
-@media (min-width: 300px) and (max-width: 600px){
-    .navbar-nav{
-       text-align: center;
-       
+      img {
+        height: 45px;
+        margin-right: 5px;
+      }
+    }
 
+    .navbar-toggle {
+      padding-top: 4px;
+    }
+
+    .navbar-nav > li > a {
+      color: #FFF;
+
+      .nav {
+        .open > a {
+          &,
+          &:hover,
+          &:focus {
+            background-color: lighten($color-primary,10%);
+            border-color: $link-color;
+          }
+        }
+      }
+
+      &:hover, &:focus {
+        background-color: lighten($color-primary,10%);
+      }
     }
 }
-.menu-icon {
-
-    padding: 10px 20px;
-    
-    color: #FAFAFA;
-    cursor: pointer;
-    float: left;
-    margin: 6px 6px 0 0;
-    border-radius: 5px;
-}
-#menuToggle { display: none; }
-
-#menuToggle:checked ~ .menu { position: absolute; left: 0; }

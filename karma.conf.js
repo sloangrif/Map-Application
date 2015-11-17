@@ -20,6 +20,7 @@ module.exports = function(config) {
       'client/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
+      'client/bower_components/angular-recaptcha/release/angular-recaptcha.js',
       'client/bower_components/angular-resource/angular-resource.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/angular-socialshare/dist/angular-socialshare.min.js',

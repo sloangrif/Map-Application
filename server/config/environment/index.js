@@ -50,6 +50,11 @@ var all = {
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
 
+  recaptcha: {
+    siteKey:      process.env.RECAPTCHA_KEY || 'key',
+    secretKey:    process.env.RECAPTCHA_SECRET || 'secret'
+  }
+
 };
 
 // Export the config object based on the NODE_ENV
