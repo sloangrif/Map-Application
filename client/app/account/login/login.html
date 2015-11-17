@@ -2,26 +2,66 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-3 col-sm-4"></div>
-    <div class="col-xs-6 col-sm-4"><img src="/assets/images/logo_alt.jpg" width="100%" height="auto" class="img-circle"><br><br></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h3 class="biz-free">Everywhere local</h3>
+    <div class="col-sm-12">
+      <h1 class="text-center">Login to Mapn</h1>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-xs-8 col-sm-6 col-sm-offset-3 border">
-      <form class="form" name="form" ng-submit="login(form)" novalidate>
+    <div class="col-sm-6 col-sm-offset-3 border">
+      <form class="form-horizontal" name="form" ng-submit="login(form)" novalidate>
 
-        <div class="form-group">
-
-          <input type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email" required>
+        <div class="form-group text-center">
+          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+            <i class="fa fa-facebook"></i> Login with Facebook
+          </a>
         </div>
 
-        <div class="form-group">
+        <div class="sep">
+          <span class="sep2">
+            OR
+          </span>
+        </div>
 
-          <input type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password" required>
+        <div class="form-group"
+             ng-class="{ 'has-success': form.email.$valid && form.email.$dirty, 'has-error': form.email.$invalid && form.email.$dirty}"
+        >
+          <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" name="email" id="email" placeholder="Email"
+              class="form-control" ng-model="user.email" required mongoose-error>
+            <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty">
+              Doesn't look like a valid email.
+            </p>
+            <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty">
+              What's your email address?
+            </p>
+            <p class="help-block" ng-show="form.email.$error.mongoose">
+              {{ errors.email }}
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group"
+            ng-class="{ 'has-success': form.password.$valid && form.password.$dirty,
+                      'has-error': form.password.$invalid && form.password.$dirty }"
+        >
+          <label for="email" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" name="password" placeholder="Password" class="form-control"
+                    ng-model="user.password"
+                    ng-minlength="3"
+                    required
+                    mongoose-error>
+
+            <p class="help-block"
+               ng-show="(form.password.$error.minlength || form.password.$error.required) && form.passport.$dirty">
+               Password must be at least 3 characters.
+            </p>
+            <p class="help-block" ng-show="form.password.$error.mongoose">
+               {{ errors.password }}
+            </p>
+          </div>
         </div>
 
         <div class="form-group has-error">
@@ -36,26 +76,15 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-default btn-lg btn-login" type="submit">
+          <button class="btn btn-primary btn-lg btn-login" type="submit">
             Login
           </button>
         </div>
 
-        <div class="sep">
-          <span class="sep2">
-            OR
-          </span>
-        </div>
-
-        <div class="text-center">
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Login with Facebook
-          </a>
-        </div>
       </form>
     </div>
-    <div class="col-xs-8 col-sm-6 col-sm-offset-3 account">
-      <p>New to mapn? <a href="/signup"> Create an account</a>.</p>
+    <div class="col-sm-6 col-sm-offset-3 account">
+      <p>New to mapn? <a class="btn btn-primary btn-sm" href="/signup"> Create an account</a></p>
     </div>
   </div>
 </div>

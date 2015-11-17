@@ -5,6 +5,18 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'font-awesome/scss/font-awesome';
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+@font-face {
+    font-family:"HoneyScript";
+    font-weight: normal;
+    src: url("../assets/fonts/HoneyScript-Light.ttf");
+}
+
+@font-face {
+    font-family:"HoneyScript";
+    font-weight: bold;
+    src: url("../assets/fonts/HoneyScript-SemiBold.ttf");
+}
+
 $color-primary: #D66C00;
 
 /**
@@ -25,6 +37,11 @@ body {
 }
 a { text-decoration: none;  }
 li { list-style-type: none; }
+
+h1 {
+  font-family: 'HoneyScript', sans-serif;
+  font-size: 4em;
+}
 
 nav li:last-child a { border-bottom: none; }
 

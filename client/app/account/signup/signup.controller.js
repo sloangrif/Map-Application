@@ -7,7 +7,6 @@ angular.module('mapnApp')
     $scope.recaptcha = {};
 
     $scope.rcResponse = function (response) {
-      console.log(response);
       $scope.recaptcha.response = response;
     }
 

@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="text-center">Sign up to Mapn</h1>
+      <h1 class="text-center">Create a Mapn account</h1>
     </div>
   </div>
   <div class="row">
@@ -26,17 +26,15 @@
         <div class="form-group"
           ng-class="{ 'has-success': form.firstname.$valid && form.lastname.$valid && form.firstname.$dirty && form.lastname.$dirty, 'has-error': (form.firstname.$invalid || form.lastname.$invalid) && (form.lastname.$dirty || form.firstname.$dirty)}"
         >
-          <div class="col-sm-6">
+          <label for="firstname" class="col-sm-2 control-label">Name</label>
+          <div class="controls form-inline col-sm-10">
             <input type="text" name="firstname" placeholder="First Name" class="form-control" ng-model="user.firstname"
                  required/>
-          </div>
 
-          <div class="col-sm-6">
             <input type="text" name="lastname" placeholder="Last Name" class="form-control" ng-model="user.lastname"
                  required/>
-          </div>
-          <div class="col-sm-12">
-            <p class="help-block" ng-show="(form.firstname.$invalid || form.lastname.$invalid) && submitted">
+
+            <p class="help-block" ng-show="(form.firstname.$invalid && form.firstname.$dirty) || (form.lastname.$invalid && form.lastname.$dirty)">
               A first and last name is required
             </p>
           </div>
@@ -61,21 +59,21 @@
         </div> -->
 
         <div class="form-group"
-          ng-class="{ 'has-success': form.email.$valid, 'has-error': form.email.$invalid}"
+          ng-class="{ 'has-success': form.email.$valid && form.email.$dirty, 'has-error': form.email.$invalid && form.email.$dirty}"
         >
-          <div class="col-sm-12">
-            <input type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email"
+          <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" name="email" id="email"
+                  placeholder="Email" class="form-control" ng-model="user.email"
                   required
                   mongoose-error/>
-          </div>
-            <div class="col-sm-12">
-            <p class="help-block" ng-show="form.email.$error.email">
+            <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty">
                 Doesn't look like a valid email.
             </p>
-            <p class="help-block" ng-show="form.email.$error.required">
+            <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty">
                 What's your email address?
             </p>
-            <p class="help-block" ng-show="form.email.$error.mongoose">
+            <p class="help-block" ng-show="form.email.$error.mongoose && form.email.$dirty">
                 {{ errors.email }}
             </p>
           </div>
@@ -85,16 +83,15 @@
           ng-class="{ 'has-success': form.password.$valid && form.password.$dirty,
                       'has-error': form.password.$invalid && form.password.$dirty }"
         >
-          <div class="col-sm-12">
+          <label for="password" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
             <input type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password"
                   ng-minlength="3"
                   required
                   mongoose-error/>
-          </div>
 
-          <div class="col-sm-12">
             <p class="help-block"
-               ng-show="(form.password.$error.minlength || form.password.$error.required)">
+               ng-show="(form.password.$error.minlength || form.password.$error.required) && form.email.$dirty">
                Password must be at least 3 characters.
             </p>
             <p class="help-block" ng-show="form.password.$error.mongoose">
@@ -106,22 +103,21 @@
         <div class="form-group"
           ng-class="{ 'has-success': !form.$error.recaptcha && submitted, 'has-error': form.$error.recaptcha && submitted }"
         >
-          <div
-              class="col-sm-12"
-              vc-recaptcha
-              key="'6LfkGBETAAAAAIwZM9bttMwOLMp98BthWtMQ2Wrr'"
-              on-create="rcCreate(widgetId)"
-              on-success="rcResponse(response)"
-              on-expire="rcExpiration()"
-          ></div>
-          <div class="col-sm-12">
+          <div class="col-sm-10 col-sm-offset-2">
+            <div
+                vc-recaptcha
+                key="'6LfkGBETAAAAAIwZM9bttMwOLMp98BthWtMQ2Wrr'"
+                on-create="rcCreate(widgetId)"
+                on-success="rcResponse(response)"
+                on-expire="rcExpiration()"
+            ></div>
             <p class="help-block" ng-show="form.$error.recaptcha && submitted">
               You must solve the captcha
             </p>
           </div>
         </div>
 
-        <div class="text-center">
+        <div class="from-group text-center">
           <button class="btn btn-primary btn-lg btn-login" type="submit">
             Create account
           </button>
