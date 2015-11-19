@@ -5,10 +5,7 @@ angular.module('mapnApp')
     $scope.map = { center: { latitude: 29.6485, longitude: -82.345 }, zoom: 10 };
     $scope.markers = [];
     /* my var    */
-    $scope.lat = "0";
-    $scope.lng = "0";
-    $scope.accuracy = "0";
-    $scope.error = "";
+    
     /* */
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
     var radius   = $scope.map.zoom * 1000;
@@ -29,49 +26,6 @@ angular.module('mapnApp')
         $scope.error = error.status + '\t' + error.statusText;
     });
 
-    /* my 
-    $scope.mapOptions = {
-      center: new google.maps.LatLng($scope.lat, $scope.lng),
-      zoom:10
-    }*/
-
-    $scope.showPosition = function (position) {
-      $scope.lat = position.coords.latitude;
-      $scope.lng = position.coords.longitude;
-      $scope.accuracy = position.coords.accuracy;
-      $scope.$apply();
-
-      var latlng = new google.maps.LatLnt($scope.lat, $scope.lng);
-      $scope.model.myMap.setCenter(latlng);
-    }
-    $scope.showError = function (error) {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          $scope.error = "User denied the request for Geolocaiton."
-          break;
-        case error.POSITION_UNAVAILABLE:
-          $scope.error = "Location information is unavailable."
-          break;
-        case error.TIMEOUT:
-          $scope.error = "The request to get user locaiton timed out."
-          break;
-        case error.UNKNOWN_ERROR:
-          $scope.error = "An unknown error occurred."
-          break;
-      };
-      $scope.$apply();
-    }  
-    $scope.getLocation = function () {
-      if(navigator.getlocation){
-        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
-      }
-      else {
-        $scope.error = "geolocation is not supported by this browser.";
-      }
-    };
-
-   /*code */
-
    
     $scope.onClick = function (data, eventName, marker) {
         $location.path('/pin/' + marker.id);
@@ -88,11 +42,58 @@ angular.module('mapnApp')
 
   })
   .controller('controlCtrl', function ($scope){
-     $scope.controlText = 'I\'m a custom control';
-        $scope.danger = false;
-        $scope.controlClick = function () {
-            $scope.danger = !$scope.danger;
-            alert('custom control clicked!');
-        };
+    $scope.controlText = 'I\'m a custom control';
+    $scope.lat = "0";
+    $scope.lng = "0";
+    $scope.accuracy = "0";
+    $scope.error = "";
+    $scope.danger = false;
+    $scope.controlClick = function () {
+      if(navigator.getlocation){
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
+        
+      }
+      else {
+        $scope.error = "geolocation is not supported by this browser.";
+        $scope.danger = !$scope.danger;
+        alert('custom control clicked!');
+      }
+      
+    };
+    $scope.getLocation = function () {
+      if(navigator.getlocation){
+        navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
+      }
+      else {
+        $scope.error = "geolocation is not supported by this browser.";
+      }
+    };
+    $scope.showError = function (error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          $scope.error = "User denied the request for Geolocaiton."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          $scope.error = "Location information is unavailable."
+          break;
+        case error.TIMEOUT:
+          $scope.error = "The request to get user locaiton timed out."
+          break;
+        case error.UNKNOWN_ERROR:
+          $scope.error = "An unknown error occurred."
+          break;
+      };
+      $scope.$apply();
+    };
+    $scope.showPosition = function (position) {
+      $scope.lat = position.coords.latitude;
+      $scope.lng = position.coords.longitude;
+      $scope.accuracy = position.coords.accuracy;
+      $scope.$apply();
+
+      var latlng = new google.maps.LatLnt($scope.lat, $scope.lng);
+      $scope.model.myMap.setCenter(latlng);
+    };
+
   });
 
