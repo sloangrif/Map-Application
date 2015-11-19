@@ -12,7 +12,7 @@ angular.module('mapnApp')
     /* */
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
     var radius   = $scope.map.zoom * 1000;
-
+    
     $http.get('/api/pins?location='+location+'&radius='+radius).
       then(function(response) {
         var markers = [];
@@ -33,7 +33,7 @@ angular.module('mapnApp')
     $scope.mapOptions = {
       center: new google.maps.LatLng($scope.lat, $scope.lng),
       zoom:10
-    }
+    }*/
 
     $scope.showPosition = function (position) {
       $scope.lat = position.coords.latitude;
@@ -71,6 +71,8 @@ angular.module('mapnApp')
     };
 
    /*code */
+
+   
     $scope.onClick = function (data, eventName, marker) {
         $location.path('/pin/' + marker.id);
     };
@@ -84,5 +86,13 @@ angular.module('mapnApp')
       $scope.markers.push(marker);
     };
 
+  })
+  .controller('controlCtrl', function ($scope){
+     $scope.controlText = 'I\'m a custom control';
+        $scope.danger = false;
+        $scope.controlClick = function () {
+            $scope.danger = !$scope.danger;
+            alert('custom control clicked!');
+        };
   });
 

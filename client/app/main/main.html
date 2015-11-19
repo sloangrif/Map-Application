@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <script type="text/ng-template" id="mapn_button.html">
-	<a href=""> <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style=""> </a>
+	 <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style="" ng-click="controlClick()"> 
 	
 </script>
 
@@ -13,7 +13,7 @@
        
         <ui-gmap-markers models="markers" coords="'self'" click="onClick">
         </ui-gmap-markers>
-        <ui-gmap-map-control template="mapn_button.html" position="BOTTOM_CENTER" index="-1"> </ui-gmap-map-control>
+        <ui-gmap-map-control template="mapn_button.html" position="BOTTOM_CENTER" controller="controlCtrl"index="-1"> </ui-gmap-map-control>
       
       </ui-gmap-google-map>
 
