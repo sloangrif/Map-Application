@@ -1,11 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <script type="text/ng-template" id="mapn_button.html">
-	 <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style="" ng-click="controlClick()"> 
+	< <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style="" ng-click=""> 
 	
 </script>
 
-
+<script type="text/ng-template" id="selforient.html">
+< <img src="/assets/images/selforient.png" alt="selforient" style="" ng-click="getLocation()">
+</script>
 <div class="container-fluid" ng-app="geo">
   <div class="row">
     <div class="col-lg-12">
@@ -13,15 +15,15 @@
        
         <ui-gmap-markers models="markers" coords="'self'" click="onClick">
         </ui-gmap-markers>
-        <ui-gmap-map-control template="mapn_button.html" position="BOTTOM_CENTER" controller="controlCtrl"index="-1"> </ui-gmap-map-control>
-      
+        <ui-gmap-map-control template="mapn_button.html" position="BOTTOM_CENTER" controller="MainCtrl"index="-1"> </ui-gmap-map-control>
+        <ui-gmap-map-control template="selforient.html" position="BOTTOM_RIGHT" controller="MainCtrl" </ui-gmap-map-contrl>
       </ui-gmap-google-map>
-      <div class="row" >
+      <div class="row" ng-show="showResult()">
          Latitude: {{lat}} <br />
          Longitude: {{lng}} <br />
          Accuracy: {{accuracy}}
       </div>
-      <div class="row">
+      <div class="row" ng-show="!showResult()">
           Error : {{error}}
           Error Code: {{error.code}}
       </div> 
