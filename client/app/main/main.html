@@ -1,12 +1,12 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <script type="text/ng-template" id="mapn_button.html">
-	< <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style="" ng-click=""> 
+	< <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style="max-width:60px;" ng-click=""> 
 	
 </script>
 
 <script type="text/ng-template" id="selforient.html">
-< <img src="/assets/images/selforient.png" alt="selforient" style="" ng-click="getLocation()">
+< <img src="/assets/images/selforient.png" alt="selforient" style="max-width:40px;" ng-click="getLocation()">
 </script>
 <div class="container-fluid" ng-app="geo">
   <div class="row">
@@ -16,7 +16,7 @@
         <ui-gmap-markers models="markers" coords="'self'" click="onClick">
         </ui-gmap-markers>
         <ui-gmap-map-control template="mapn_button.html" position="BOTTOM_CENTER" controller="MainCtrl"index="-1"> </ui-gmap-map-control>
-        <ui-gmap-map-control template="selforient.html" position="BOTTOM_RIGHT" controller="MainCtrl" </ui-gmap-map-contrl>
+        <ui-gmap-map-control template="selforient.html" position="TOP_RIGHT" controller="MainCtrl" </ui-gmap-map-contrl>
       </ui-gmap-google-map>
       <div class="row" ng-show="showResult()">
          Latitude: {{lat}} <br />

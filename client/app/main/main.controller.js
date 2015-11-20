@@ -84,39 +84,7 @@ angular.module('mapnApp')
       }
     };
 
-  })
-
-  .controller('controlCtrl', function ($scope, $controller){
-    $controller('MainCtrl', {$scope: $scope});
-    $scope.controlText = 'I\'m a custom control';
-    $scope.lat = "0";
-    $scope.lng = "0";
-    $scope.accuracy = "0";
-    $scope.error = "";
-    $scope.danger = false;
-    $scope.controlClick = function () {
-      $scope.getLocation();
-    };
-    $scope.showPosition = function (position) {
-      $scope.lat = position.coords.latitude;
-      $scope.lng = position.coords.longitude;
-      $scope.accuracy = position.coords.accuracy;
-      //$scope.$apply();
-
-      //var latlng = new google.maps.LatLnt($scope.lat, $scope.lng);
-      //$scope.model.myMap.setCenter(latlng);
-    };
-    $scope.getLocation = function () {
-      
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition($scope.showPosition);
-      }
-      else {
-          $scope.error = "Geolocation is not supported by this browser.";
-      }
-    };
- 
-   // $scope.getLocation();
-
   });
+
+
 
