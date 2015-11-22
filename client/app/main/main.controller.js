@@ -1,10 +1,11 @@
+
 'use strict';
 
 angular.module('mapnApp')
   .controller('MainCtrl', function ($scope, $http, $location) {
     $scope.error = "";
     $scope.danger = false;
-    $scope.lat = "29.6485";
+    $scope.lat = "28.6485";
     $scope.lng = "-82.345";
 
     $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
@@ -12,7 +13,6 @@ angular.module('mapnApp')
     
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
     var radius   = $scope.map.zoom * 1000;
-
     $http.get('/api/pins?location='+location+'&radius='+radius).
       then(function(response) {
         var markers = [];
@@ -60,16 +60,14 @@ angular.module('mapnApp')
       $scope.$apply();
     }
     $scope.getLocation = function () {
-     
-      //$scope.map.setCenter(0);
-      if (navigator.geolocation) {
+           if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position){
             console.log(position.coords.latitude);
             console.log(position.coords.longitude);
             $scope.lat = position.coords.latitude;
             $scope.lng = position.coords.longitude;
             $scope.$apply();
-            
+            //MUST SET CENTER HERE, BUT I DON'T KNOW HOW            
 
           });
 
