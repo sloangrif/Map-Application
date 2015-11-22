@@ -16,6 +16,7 @@
     <div class="navbar-collapse" id="main-nav" collapse="navbarCollapsed">
       <ul class="nav navbar-nav">
         <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+        <li ng-show="isBusiness()"><a href="/analytics">My Business</a></li>
         <li ng-show="isLoggedIn()"><a href="#">My Videos</a></li>
         <li ng-show="isLoggedIn()"><a href="#">My Bounty</a></li>
       </ul>
@@ -25,7 +26,8 @@
         <li class="dropdown" ng-if="isLoggedIn()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/settings">Account Settings</a></li>
+            <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Administration</a></li>
+            <li ng-class="{active: isActive('/settings')}"><a href="/settings">Account Settings</a></li>
             <li><a href="mailto:feedback@mapn.mobi?Subject=[USER]%20Feedback">Send Feedback</a></li>
             <li role="separator" class="divider"></li>
             <li><a href ng-click="logout()">Sign out</a></li>
