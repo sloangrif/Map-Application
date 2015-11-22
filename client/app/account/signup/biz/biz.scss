@@ -1,8 +1,16 @@
+@font-face {
+	font-family: 'HoneyScript';
+	src: url('assets/fonts/HoneyScript-Light.ttf');
+}
+@font-face {
+	font-family: 'HoneyScript Bold';
+	src: url('assets/fonts/HoneyScript-SemiBold.ttf');
+}
+
 .biz-free {
-	color: grey;
+	color: black;
 	text-align: center;
-	font-style: italic;
-	font-family: "Verdana", Geneva, sans-serif;
+	font-family: "HoneyScript", Helvetica, sans-serif;
 	padding-top: 10px;
 }
 
@@ -17,8 +25,8 @@
 }
 
 .sep {
-	height: 1px; 
-	background-color: lightgrey; 
+	height: 1px;
+	background-color: lightgrey;
 	text-align: center;
 	margin-top: 40px;
 	margin-bottom: 40px;

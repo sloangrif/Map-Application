@@ -32,7 +32,7 @@ angular.module('mapnApp')
         });
       }
     };
-    
+
     $scope.loginOauth = function(provider) {
       //$window.location.href = '/auth/' + provider;
     };
