@@ -2,16 +2,17 @@
 
 angular.module('mapnApp')
   .controller('MainCtrl', function ($scope, $http, $location) {
-    $scope.map = { center: { latitude: 29.6485, longitude: -82.345 }, zoom: 10 };
-    $scope.markers = [];
-    
     $scope.error = "";
     $scope.danger = false;
-    $scope.lat = "10";
-    $scope.lng ="10";
+    $scope.lat = "29.6485";
+    $scope.lng = "-82.345";
+
+    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
+    $scope.markers = [];
+    
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
     var radius   = $scope.map.zoom * 1000;
-    var startPos;
+
     $http.get('/api/pins?location='+location+'&radius='+radius).
       then(function(response) {
         var markers = [];
@@ -39,20 +40,8 @@ angular.module('mapnApp')
       marker.id = $scope.markers.length;
       $scope.markers.push(marker);
     };
-    $scope.showResult = function () {
-      return $scope.error == "";
-    };
- 
-    $scope.showPosition = function (position) {
-      console.log(position.coords.latitude);  
-      console.log(position.coords.longitude); 
-      //$scope.$apply(function(position){
-      $scope.lat = position.coords.latitude;
-      $scope.lng = position.coords.longitude;
-     // });
-     // var latlng = new google.maps.LatLnt(position.coords.latitude, position.coords.longitude);
-      //$scope.map.setCenter(latlng);
-    }
+   
+  
     $scope.showError = function (error) {
       switch (error.code) {
           case error.PERMISSION_DENIED:
@@ -71,16 +60,25 @@ angular.module('mapnApp')
       $scope.$apply();
     }
     $scope.getLocation = function () {
-
+     
+      //$scope.map.setCenter(0);
       if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
+          navigator.geolocation.getCurrentPosition(function(position){
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+            $scope.lat = position.coords.latitude;
+            $scope.lng = position.coords.longitude;
+            $scope.$apply();
+            
+
+          });
 
       }
       else {
           $scope.error = "Geolocation is not supported by this browser.";
       }
     }
-
+    $scope.getLocation();
   });
 
 
