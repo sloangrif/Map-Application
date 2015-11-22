@@ -61,24 +61,31 @@ angular.module('mapnApp')
       }
       $scope.$apply();
     }
+    $scope.test = function(){
+      console.log("test");
+    }
     $scope.getLocation = function () {
-     
+      
       if (navigator.geolocation) {
+          console.log("getlocation");
           navigator.geolocation.getCurrentPosition(function(position){
-            console.log(position.coords.latitude);
-            console.log(position.coords.longitude);
             $scope.lat = position.coords.latitude;
             $scope.lng = position.coords.longitude;
             $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
             $scope.$apply();
+            
           });
 
       }
       else {
           $scope.error = "Geolocation is not supported by this browser.";
       }
+      
+
     }
+
     $scope.getLocation();
+    
   });
 
 
