@@ -1,5 +1,6 @@
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 $fa-font-path: "/bower_components/font-awesome/fonts";
+$brand-primary: #D66C00;
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 @import 'font-awesome/scss/font-awesome';
@@ -17,7 +18,8 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     src: url("../assets/fonts/HoneyScript-SemiBold.ttf");
 }
 
-$color-primary: #D66C00;
+
+$color-primary: lighten($brand-primary, 3%);
 
 /**
  * App-wide Styles
