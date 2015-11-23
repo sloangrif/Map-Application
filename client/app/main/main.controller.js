@@ -5,7 +5,7 @@ angular.module('mapnApp')
   .controller('MainCtrl', function ($scope, $http, $location) {
     $scope.error = "";
     $scope.danger = false;
-    $scope.lat = "28.6485";
+    $scope.lat = "29.6485";
     $scope.lng = "-82.345";
 
     $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
@@ -71,9 +71,8 @@ angular.module('mapnApp')
           navigator.geolocation.getCurrentPosition(function(position){
             $scope.lat = position.coords.latitude;
             $scope.lng = position.coords.longitude;
-            $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
             $scope.$apply();
-            
+            $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
           });
 
       }
