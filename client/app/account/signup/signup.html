@@ -1,6 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
       <h1 class="text-center">Create a Mapn account</h1>
@@ -27,15 +27,26 @@
           ng-class="{ 'has-success': form.firstname.$valid && form.lastname.$valid && form.firstname.$dirty && form.lastname.$dirty, 'has-error': (form.firstname.$invalid || form.lastname.$invalid) && (form.lastname.$dirty || form.firstname.$dirty)}"
         >
           <label for="firstname" class="col-sm-2 control-label">Name</label>
-          <div class="controls form-inline col-sm-10">
+          <div class="controls form col-sm-10">
             <input type="text" name="firstname" placeholder="First Name" class="form-control" ng-model="user.firstname"
-                 required/>
+                required/>
 
+              <p class="help-block" ng-show="(form.firstname.$invalid && form.firstname.$dirty) || (form.lastname.$invalid && form.lastname.$dirty)">
+                A first name is required
+              </p>
+          </div>
+        </div>
+
+        <div class="form-group"
+          ng-class="{ 'has-success': form.lastname.$valid && form.lastname.$dirty, 'has-error': form.lastname.$invalid && form.lastname.$dirty}"
+        >
+          <label for="lastname" class="col-sm-2 control-label"> </label>
+          <div class="controls form col-sm-10">
             <input type="text" name="lastname" placeholder="Last Name" class="form-control" ng-model="user.lastname"
                  required/>
 
-            <p class="help-block" ng-show="(form.firstname.$invalid && form.firstname.$dirty) || (form.lastname.$invalid && form.lastname.$dirty)">
-              A first and last name is required
+            <p class="help-block" ng-show="(form.lastname.$invalid && form.lastname.$dirty)">
+              A last name is required
             </p>
           </div>
         </div>
