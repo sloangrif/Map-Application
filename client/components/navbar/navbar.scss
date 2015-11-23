@@ -24,6 +24,14 @@
       }
     }
 
+    .navbar-profile-photo {
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+      margin-right: 0.75em;
+      box-shadow: 0 0 2px darken($color-primary, 20%);
+    }
+
     .navbar-brand {
       // background-color: lighten($color-primary, 10%);
       color: #fff;
@@ -42,6 +50,8 @@
 
     .navbar-nav > li > a {
       color: #FFF;
+      min-height: 55px;
+      text-shadow: 1px 1px 0px darken($color-primary, 20%);
 
       .nav {
         .open > a {
