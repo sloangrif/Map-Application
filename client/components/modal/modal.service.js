@@ -71,6 +71,44 @@ angular.module('mapnApp')
               del.apply(event, args);
             });
           };
+        },
+
+        changePassword: function(change) {
+
+          /**
+           * Open a change password confirmation modal
+           * @param  {All}           - args are passed straight to del callback
+           */
+          return function() {
+            change = change || noop;
+            var args = Array.prototype.slice.call(arguments),
+                changePasswordModal;
+
+            changePasswordModal = openModal({
+              modal: {
+                dismissable: true,
+                title: 'Confirm Change Password',
+                html: '<p>Are you sure you want to <strong> change your password</strong> ?</p>',
+                buttons: [{
+                  classes: 'btn-danger',
+                  text: 'Change Password',
+                  click: function(e) {
+                    changePasswordModal.close(e);
+                  }
+                }, {
+                  classes: 'btn-default',
+                  text: 'Cancel',
+                  click: function(e) {
+                    changePasswordModal.dismiss(e);
+                  }
+                }]
+              }
+            }, 'modal-danger');
+
+            changePasswordModal.result.then(function(event) {
+              change.apply(event, args);
+            });
+          };
         }
       }
     };
