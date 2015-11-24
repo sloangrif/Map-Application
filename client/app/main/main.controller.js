@@ -2,10 +2,10 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MainCtrl', function ($scope, $http, $location) {
+  .controller('MainCtrl', function ($scope, $http, $location, $window) {
     $scope.error = "";
     $scope.danger = false;
-    $scope.lat = "28.6485";
+    $scope.lat = "29.6485";
     $scope.lng = "-82.345";
 
     $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
@@ -65,7 +65,9 @@ angular.module('mapnApp')
     $scope.test = function(){
       console.log("test");
     };
-
+    $scope.reload = function(){
+      $window.location.reload();
+    }
     $scope.getLocation = function () {
       
       if (navigator.geolocation) {
