@@ -5,7 +5,7 @@ angular.module('mapnApp')
   .controller('MainCtrl', function ($scope, $http, $location) {
     $scope.error = "";
     $scope.danger = false;
-    $scope.lat = "29.6485";
+    $scope.lat = "28.6485";
     $scope.lng = "-82.345";
 
     $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
@@ -60,19 +60,23 @@ angular.module('mapnApp')
               break;
       }
       $scope.$apply();
-    }
+    };
+
     $scope.test = function(){
       console.log("test");
-    }
+    };
+
     $scope.getLocation = function () {
       
       if (navigator.geolocation) {
           console.log("getlocation");
           navigator.geolocation.getCurrentPosition(function(position){
+            console.log(position);
             $scope.lat = position.coords.latitude;
             $scope.lng = position.coords.longitude;
+            $scope.map.center.latitude = position.coords.latitude;
+            $scope.map.center.longitude = position.coords.longitude;
             $scope.$apply();
-            $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
           });
 
       }
