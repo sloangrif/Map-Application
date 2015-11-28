@@ -4,6 +4,10 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var path = require('path');
+var uuid = require('node-uuid');
+var lwip = require('lwip');
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -83,6 +87,56 @@ exports.changePassword = function(req, res, next) {
       res.status(403).send('Forbidden');
     }
   });
+};
+
+/**
+ * Change a users profile fields
+*/
+exports.update = function(req, res, next) {
+  var userId = req.user._id;
+  var profile = req.body;
+  var file = req.files.file;
+  var photo = req.user.photo || '/static/mapn/profile.png';
+
+  User.findOne({_id: userId }, function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(401).send('Unauthorized');
+
+    user.name = profile.name;
+    user.email = profile.email;
+    user.photo = photo;
+    user.phone = profile.phone;
+    user.save();
+
+    // Process user profile image
+    if (file && file.path) {
+      var photoFile = '/' + uuid.v4() + '.png';
+      var filePath = path.resolve('./server/static') + photoFile;
+      lwip.open(file.path, function(err, image) {
+        image.resize(100, 100, function(err, image) {
+          image.toBuffer('png', function(err, buffer) {
+            // save buffer to disk
+            fs.writeFile(filePath, buffer, function(err) {
+              if(err) {
+                  return console.log(err);
+              } else {
+                photo = '/static' + photoFile;
+                user.photo = photo;
+                console.log('saving photo ' + photo);
+                user.save();
+              }
+            });
+            // delete temp file
+            fs.unlink(file.path);
+          });
+        });
+      });
+    }
+
+
+    res.status(200).send('OK');
+  });
+
 };
 
 /**

@@ -5,6 +5,7 @@ var controller = require('./user.controller');
 var config = require('../../config/environment');
 var auth = require('../../auth/auth.service');
 var recaptcha = require('express-recaptcha');
+var multipart = require('connect-multiparty');
 
 var router = express.Router();
 
@@ -16,5 +17,7 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', recaptcha.middleware.verify, controller.create);
+router.put('/me/profile', multipart(), auth.isAuthenticated(), controller.update);
+//router.put('/:id/profile', auth.hasRole('admin'), controller.updateUser);
 
 module.exports = router;
