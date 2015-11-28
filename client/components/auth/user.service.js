@@ -12,6 +12,14 @@ angular.module('mapnApp')
           controller:'password'
         }
       },
+      changeProfile: {
+        method: 'PUT',
+        params: {
+          id: 'me',
+          controller:'profile'
+        },
+        headers: { 'Content-Type': 'multipart/form-data'}
+      },
       get: {
         method: 'GET',
         params: {

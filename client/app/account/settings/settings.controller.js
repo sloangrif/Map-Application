@@ -2,7 +2,6 @@
 
 angular.module('mapnApp')
   .controller('SettingsCtrl', function ($scope, $state) {
-    console.log($state.current.name);
     $scope.actions = [
       { name: 'Profile',
         state: 'settings.profile',
@@ -12,6 +11,7 @@ angular.module('mapnApp')
       }
     ];
 
+    // Set active on reload
     angular.forEach($scope.actions, function(value) {
       if ($state.current.name === value.state) {
         value.active = true;
@@ -34,7 +34,7 @@ angular.module('mapnApp')
     };
 
   })
-  .controller('PasswordCtrl', function ($scope, User, Auth, Modal) {
+  .controller('PasswordCtrl', function ($scope, $filter, User, Auth, Modal) {
     $scope.errors = {};
     $scope.user = Auth.getCurrentUser() || {};
 
@@ -46,7 +46,7 @@ angular.module('mapnApp')
           console.log(user);
           Auth.changePassword( user.oldPassword, user.newPassword )
           .then( function() {
-            $scope.message = 'Password successfully changed.';
+            $scope.message = 'Password successfully changed. ' + $filter('date')(new Date(), 'mediumTime');
           })
           .catch( function() {
             form.password.$setValidity('mongoose', false);
@@ -57,7 +57,7 @@ angular.module('mapnApp')
       }
 		};
   })
-  .controller('ProfileCtrl', function ($scope, User, Auth) {
+  .controller('ProfileCtrl', function ($scope, $filter, User, Auth) {
     $scope.errors = {};
     $scope.user = Auth.getCurrentUser() || {};
 
@@ -66,9 +66,10 @@ angular.module('mapnApp')
       if (form.$valid) {
         delete $scope.user.oldPassword;
         delete $scope.user.newPassword;
+        $scope.user.file = $scope.file;
         Auth.changeCurrentProfile($scope.user)
         .then( function() {
-          $scope.message = 'Password successfully changed.';
+          $scope.message = 'Profile successfully changed.' + $filter('date')(new Date(), 'mediumTime');
         })
         .catch( function() {
           form.$setValidity('mongoose', false);

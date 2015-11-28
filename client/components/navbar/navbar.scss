@@ -8,6 +8,22 @@
     border-bottom-color: darken($color-primary,5%);
     color: #ddd;
 
+    .nav {
+      .open > a {
+        &,
+        &:hover,
+        &:focus {
+          background-color: lighten($color-primary,10%);
+        }
+      }
+      & > li > a {
+        &:hover,
+        &:focus  {
+          background-color: lighten($color-primary,10%);
+        }
+      }
+    }
+
     .dropdown-menu {
       background-color: $color-primary;
       color: #ddd;
@@ -52,20 +68,5 @@
       color: #FFF;
       min-height: 55px;
       text-shadow: 1px 1px 0px darken($color-primary, 20%);
-
-      .nav {
-        .open > a {
-          &,
-          &:hover,
-          &:focus {
-            background-color: lighten($color-primary,10%);
-            border-color: $link-color;
-          }
-        }
-      }
-
-      &:hover, &:focus {
-        background-color: lighten($color-primary,10%);
-      }
     }
 }
