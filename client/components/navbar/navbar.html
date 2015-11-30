@@ -16,9 +16,11 @@
     <div class="navbar-collapse" id="main-nav" collapse="navbarCollapsed">
       <ul class="nav navbar-nav">
         <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-        <li ng-show="isLoggedIn()"><a href="#">My Videos</a></li>
-        <li ng-show="isLoggedIn()"><a href="#">My Bounty</a></li>
+        <li ng-show="isLoggedIn()"><a href="/myvideos">My Videos</a></li>
+        <li ng-show="isLoggedIn()"><a href="/mybounty">My Bounty</a></li>
+        <li ng-show="isLoggedIn()"><a ng-href="mailto:feedback@mapn.mobi?subject=[{{user.name}}] Feedback">Feedback</a></li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()"><a href="/login">Login</a></li>
         <li ng-hide="isLoggedIn()"><a href="/signup">Signup</a></li>
@@ -34,45 +36,3 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<!-- <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container-fluid">
-
-    <div class="navbar-header">
-      <div class="company-name">
-        <img src="assets/images/logo.png"/>
-        <a ng-href="/"><span>mapn<span></a>
-      </div>
-    </div>
-    <div ng-show="isLoggedIn()">
-      <input type="checkbox" id="menuToggle">
-      <label for="menuToggle" class="menu-icon">
-        <i class="fa fa-bars"></i>
-      </label>
-      <nav class="menu">
-        <ul>
-          <li ng-show="isLoggedIn()" id="title">user {{user}}</li>
-          <li ng-show="isAdmin()" id="title">ADMINISTRATION</li>
-          <li ng-show="isAdmin()"><a href="/admin">Manage Users</a></li>
-          <li ng-show="isAdmin()"><a href="#">Manage Pins</a></li>
-          <li ng-show="isBusiness()" id="title">MY BUSINESS</li>
-          <li ng-show="isBusiness()"><a href="/analytics">My Pins</a></li>
-          <li ng-show="isBusiness()"><a href="#">Claim Pins</a></li>
-          <li ng-show="isLoggedIn()"><a href="/settings">Account Settings</a></li>
-          <li ng-show="isLoggedIn()"><a href="#">My Money</a></li>
-          <li ng-show="isLoggedIn()"><a href="#">Send Feedback</a></li>
-          <div ng-show="isLoggedIn()" id="signout_button">
-          <li id="signout"><a href="" ng-click="logout()">Sign Out</a></li>
-          </div>
-        </ul>
-      </nav>
-    </div>
-
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-      </ul>
-  </div>
-</div>
- -->
