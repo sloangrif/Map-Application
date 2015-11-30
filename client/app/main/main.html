@@ -1,12 +1,27 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container-fluid">
+<script type="text/ng-template" id="mapn_button.html">
+	<a href=""> <img src="/assets/images/Mapn_Button.png" alt="Mapn_Button" style="max-width:60px;" ng-click="test()"> </a>
+	
+</script>
+
+<script type="text/ng-template" id="selforient.html">
+  <a href=""><img src="/assets/images/selforient.png" alt="selforient" style="max-width:40px;" ng-click="reload()"></a>
+</script>
+
+<div class="container-fluid" >
   <div class="row">
     <div class="col-lg-12">
-      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'refresh='true' control="map.control" >
+       
         <ui-gmap-markers models="markers" coords="'self'" click="onClick">
         </ui-gmap-markers>
+        <ui-gmap-map-control template="mapn_button.html" position="BOTTOM_CENTER" controller="MainCtrl"index="-1"> </ui-gmap-map-control>
+
+        <ui-gmap-map-control template="selforient.html" position="RIGHT_BOTTOM" controller="MainCtrl"> </ui-gmap-map-contrl>
       </ui-gmap-google-map>
+
     </div>
   </div>
 </div>
+
