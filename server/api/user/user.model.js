@@ -17,7 +17,10 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   facebook: {},
-  github: {}
+  photo: {
+    type: String,
+    default: '/static/mapn/profile.png'
+  }
 });
 
 /**

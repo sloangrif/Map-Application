@@ -8,6 +8,22 @@
     border-bottom-color: darken($color-primary,5%);
     color: #ddd;
 
+    .nav {
+      .open > a {
+        &,
+        &:hover,
+        &:focus {
+          background-color: lighten($color-primary,10%);
+        }
+      }
+      & > li > a {
+        &:hover,
+        &:focus  {
+          background-color: lighten($color-primary,10%);
+        }
+      }
+    }
+
     .dropdown-menu {
       background-color: $color-primary;
       color: #ddd;
@@ -22,6 +38,14 @@
             color: #fff;
           }
       }
+    }
+
+    .navbar-profile-photo {
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+      margin-right: 0.75em;
+      box-shadow: 0 0 2px darken($color-primary, 20%);
     }
 
     .navbar-brand {
@@ -42,20 +66,7 @@
 
     .navbar-nav > li > a {
       color: #FFF;
-
-      .nav {
-        .open > a {
-          &,
-          &:hover,
-          &:focus {
-            background-color: lighten($color-primary,10%);
-            border-color: $link-color;
-          }
-        }
-      }
-
-      &:hover, &:focus {
-        background-color: lighten($color-primary,10%);
-      }
+      min-height: 55px;
+      text-shadow: 1px 1px 0px darken($color-primary, 20%);
     }
 }

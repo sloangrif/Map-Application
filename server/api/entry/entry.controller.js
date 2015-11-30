@@ -6,7 +6,7 @@ var User = require('././entry.model');
 var fs = require('fs');
 var path = require('path');
 var ffmpeg = require('fluent-ffmpeg');
-var uuid = require('node-uuid')
+var uuid = require('node-uuid');
 
 var getUserScore = function(userId, entry) {
   if (!userId) return 0;

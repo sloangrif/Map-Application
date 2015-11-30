@@ -6,7 +6,7 @@ exports.setup = function (User, config) {
       clientID: config.facebook.clientID,
       clientSecret: config.facebook.clientSecret,
       callbackURL: config.facebook.callbackURL,
-      profileFields: ['id', 'displayName', 'emails', 'name']
+      profileFields: ['id', 'displayName', 'emails', 'name', 'photos']
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({
@@ -23,6 +23,7 @@ exports.setup = function (User, config) {
             role: 'user',
             // username: profile.username,
             provider: 'facebook',
+            photo: profile.photos ? profile.photos[0].value : '/static/mapn/profile.png',
             facebook: profile._json
           });
           user.save(function(err) {

@@ -20,15 +20,21 @@
         <li ng-show="isLoggedIn()"><a href="/mybounty">My Bounty</a></li>
         <li ng-show="isLoggedIn()"><a ng-href="mailto:feedback@mapn.mobi?subject=[{{user.name}}] Feedback">Feedback</a></li>
       </ul>
-
+      
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()"><a href="/login">Login</a></li>
         <li ng-hide="isLoggedIn()"><a href="/signup">Signup</a></li>
         <li class="dropdown" ng-if="isLoggedIn()">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}}<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+             <img
+                  ng-src="{{user.photo || '/static/mapn/profile.png'}}"
+                  class="navbar-profile-photo"
+              />
+              {{user.name}}&nbsp;
+              <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-            <li><a href="/settings">Account Settings</a></li>
-            <li role="separator" class="divider"></li>
+            <li><a href="/settings/profile">Account Settings</a></li>
             <li><a href ng-click="logout()">Sign out</a></li>
           </ul>
         </li>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mapnApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, Upload, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
       currentUser = User.get();
@@ -82,6 +82,7 @@ angular.module('mapnApp')
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
 
+
         return User.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
@@ -92,12 +93,33 @@ angular.module('mapnApp')
         }).$promise;
       },
 
+      changeCurrentProfile: function(newProfile) {
+        // var cb = callback || angular.noop;
+
+        console.log(newProfile);
+
+        return Upload.upload({
+          url: '/api/users/me/profile',
+          method: 'PUT',
+          file: newProfile.file,
+          data: {
+            name: newProfile.firstname + ' ' + newProfile.lastname,
+            phone: newProfile.phone,
+            email: newProfile.email
+          }
+        });
+      },
+
       /**
        * Gets all available info on authenticated user
        *
        * @return {Object} user
        */
       getCurrentUser: function() {
+        if (currentUser.name) {
+          currentUser.firstname = currentUser.name.split(' ')[0];
+          currentUser.lastname = currentUser.name.split(' ')[1];
+        }
         return currentUser;
       },
 

@@ -1,5 +1,6 @@
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 $fa-font-path: "/bower_components/font-awesome/fonts";
+$brand-primary: #D66C00;
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 @import 'font-awesome/scss/font-awesome';
@@ -17,7 +18,8 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     src: url("../assets/fonts/HoneyScript-SemiBold.ttf");
 }
 
-$color-primary: #D66C00;
+
+$color-primary: lighten($brand-primary, 3%);
 
 /**
  * App-wide Styles
@@ -57,6 +59,7 @@ nav li:last-child a { border-bottom: none; }
 @import 'myvideos/myvideos.scss';
 @import 'pin/pin.scss';
 @import 'entry/entry.scss';
+@import 'footer/footer.scss';
 @import 'modal/modal.scss';
 @import 'navbar/navbar.scss';
 @import 'upload/upload.scss';
