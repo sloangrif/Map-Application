@@ -17,7 +17,7 @@
       <p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-link"></span>&emsp; {{pin.website}} </p>
     </div>
     <div class="col-xs-1 col-sm-0"></div>
-    <div class="col-xs-10 col-sm-3 bounty">
+    <div ng-show="{{pin.bounty != null}}" class="col-xs-10 col-sm-3 bounty">
     <h3 style="padding:2%;">Bounty</h3>
     {{pin.bounty.description}}
     </div>
