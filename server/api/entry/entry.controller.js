@@ -53,7 +53,7 @@ exports.index = function(req, res) {
   if (req.query.pin) {
     query.where('pin').equals(req.query.pin);
   } else {
-    //return res.status(400).json("Must include pin id in request parameters");
+   // return res.status(400).json("Must include pin id in request parameters");
   }
 
   if (req.query.creator_id) {

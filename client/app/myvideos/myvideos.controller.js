@@ -1,20 +1,13 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MyvideosCtrl', function ($scope, User, $modal, Auth) {
+  .controller('MyvideosCtrl', function ($scope, Auth, User, $http, $timeout, $modal) {
     
     
-    /*var userID = $stateParams.userID;
-    $scope.user = {'id': userID};
-    $scope.error = '';*/
-
-   $scope.isLoggedIn = true;
-    Auth.isLoggedInAsync(function(loggedIn) {
-      $scope.isLoggedIn = loggedIn;
-    });
-   
-  $scope.userID = Auth.getCurrentUser();
-
+    
+  //$scope.uploadOpen = false;
+  var userID = Auth.getCurrentUser();
+  $scope.user = Auth.getCurrentUser();
 /*$http.get('/api/user/'+id).
   then(function(response) {
     var user = response.data;
@@ -35,13 +28,15 @@ angular.module('mapnApp')
         // do something with 'response' data
 
         userID.entries = response.data;
+
         
       }, function(error) {
         // handle error if needed
         $scope.error = error.status + '\t' + error.statusText;
       });
 
-  
+      
+    
 
 });
 /*
