@@ -28,9 +28,12 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function (req, res, next) {
+  if(!req.recaptcha) {
+    return res.status(422).send('Creating user requires sending recaptcha response');
+  }
   if(req.recaptcha.error) {
-    console.log(req.captcha.error);
-    return res.status(422).send('Could not verify captcha');
+    console.log(req.recaptcha);
+    return res.status(422).send('Could not verify captcha:\n' + req.recaptcha.error);
   }
 
   var newUser = new User(req.body);
