@@ -43,7 +43,7 @@ angular.module('mapnApp')
       $scope.markers.push(marker);
     };
    
-  
+    // debug purpose
     $scope.showError = function (error) {
       switch (error.code) {
           case error.PERMISSION_DENIED:
@@ -61,7 +61,7 @@ angular.module('mapnApp')
       }
       $scope.$apply();
     };
-
+    // debug purpose
     $scope.test = function(){
       console.log("test");
     };
@@ -71,9 +71,7 @@ angular.module('mapnApp')
     $scope.getLocation = function () {
       
       if (navigator.geolocation) {
-          console.log("getlocation");
           navigator.geolocation.getCurrentPosition(function(position){
-            console.log(position);
             $scope.lat = position.coords.latitude;
             $scope.lng = position.coords.longitude;
             $scope.map.center.latitude = position.coords.latitude;
@@ -86,7 +84,6 @@ angular.module('mapnApp')
           $scope.error = "Geolocation is not supported by this browser.";
       }
       
-
     }
 
     $scope.getLocation();
