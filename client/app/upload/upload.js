@@ -6,6 +6,7 @@ angular.module('mapnApp')
       .state('upload_pin', {
         url: '/upload',
         templateUrl: 'app/upload/upload.html',
-        controller: 'UploadPinCtrl'
+        controller: 'UploadPinCtrl',
+        authenticate: true
       });
   });
