@@ -11,8 +11,8 @@ router.get('/:id', controller.show);
 router.post('/', multipart(), auth.isAuthenticated(), controller.create);
 router.post('/:id/like', auth.isAuthenticated(), controller.like);
 router.post('/:id/dislike', auth.isAuthenticated(), controller.dislike);
-router.put('/:id', auth.isAuthenticated(), controller.update);
-router.patch('/:id', auth.isAuthenticated(), controller.update);
-router.delete('/:id', auth.isAuthenticated(), controller.destroy);
+router.put('/:id', auth.hasRole('admin'), controller.update);
+router.patch('/:id', auth.hasRole('admin'), controller.update);
+router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 module.exports = router;
