@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MainCtrl', function ($scope, $http, $location, $window) {
+  .controller('MainCtrl', function ($scope, $http, $location, $window, $timeout, $state) {
     $scope.error = "";
     $scope.danger = false;
     $scope.lat = "29.6485";
@@ -62,14 +62,12 @@ angular.module('mapnApp')
       $scope.$apply();
     };
 
-    $scope.test = function(){
-      console.log("test");
-    };
     $scope.reload = function(){
       $window.location.reload();
-    }
-    $scope.getLocation = function () {
-      
+    };
+
+    $scope.getLocation = (function () {
+
       if (navigator.geolocation) {
           console.log("getlocation");
           navigator.geolocation.getCurrentPosition(function(position){
@@ -80,17 +78,16 @@ angular.module('mapnApp')
             $scope.map.center.longitude = position.coords.longitude;
             $scope.$apply();
           });
-
       }
       else {
           $scope.error = "Geolocation is not supported by this browser.";
       }
-      
+    })();
 
-    }
+    $scope.upload = function() {
+      $state.transitionTo('upload_pin');
+    };
 
-    $scope.getLocation();
-    
   });
 
 
