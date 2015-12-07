@@ -43,7 +43,7 @@ angular.module('mapnApp')
           $scope.progress.type = 'success';
           $timeout(function () {
               file.result = response.data;
-              $state.transitionTo('main');
+              $state.go('pin', {id: pin._id});
           }, 1000);
       }, function (error) {
           console.log('error:', error);

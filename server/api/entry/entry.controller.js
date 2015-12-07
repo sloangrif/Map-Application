@@ -7,6 +7,24 @@ var fs = require('fs');
 var path = require('path');
 var ffmpeg = require('fluent-ffmpeg');
 var uuid = require('node-uuid');
+var s3 = require('s3');
+var config = require('../../config/environment');
+
+var client = s3.createClient({
+  maxAsyncS3: 20,     // this is the default
+  s3RetryCount: 3,    // this is the default
+  s3RetryDelay: 1000, // this is the default
+  multipartUploadThreshold: 20971520, // this is the default (20 MB)
+  multipartUploadSize: 15728640, // this is the default (15 MB)
+  s3Options: {
+    accessKeyId: config.AWS_ACCESS_KEY_ID,
+    secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
+    region: "us-east-1"
+    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
+  },
+});
+
+var s3BucketName = 'mapnmobi';
 
 var getUserScore = function(userId, entry) {
   if (!userId) return 0;
@@ -22,7 +40,6 @@ var getUserScore = function(userId, entry) {
 // Get list of entries
 exports.index = function(req, res) {
   var date = new Date(0);
-  console.log(req.user);
   req.user = req.user || {};
   var userId = req.user._id;
   req.query.limit = req.query.limit || 25;
@@ -36,7 +53,7 @@ exports.index = function(req, res) {
   if (req.query.pin) {
     query.where('pin').equals(req.query.pin);
   } else {
-    return res.status(400).json("Must include pin id in request parameters");
+    //return res.status(400).json("Must include pin id in request parameters");
   }
 
   if (req.query.creator_id) {
@@ -136,6 +153,7 @@ exports.dislike = function(req, res) {
 // Creates a new entry in the DB.
 exports.create = function(req, res) {
   if (!req.body || !req.body.pin || !req.files.file) {
+    console.log(req.body);
     return res.status(400).json("Must include pin and video in data");
   }
 
@@ -143,11 +161,11 @@ exports.create = function(req, res) {
   var id = uuid.v4();
   var basePath = path.resolve('./server/static');
 
-  var videoFile = id + '.mp4';
-  var screenshotFile = id + '.png';
+  var videoFile = '/tmp/' + id + '.mp4';
+  var screenshotFile = '/tmp/' + id + '.png';
   var wmimage = basePath + '/mapn/logo.png';
 
-  req.body.video = "/static/" + videoFile;
+  req.body.video = "/static/mapn/uploading.png";
   req.body.thumbnail = "/static/mapn/uploading.png";
   req.body.created_by = req.user._id;
 
@@ -156,16 +174,12 @@ exports.create = function(req, res) {
     if(err) { return handleError(res, err); }
     //Convert video and take a screenshot
     var proc = new ffmpeg(file.path)
-    .takeScreenshots({
-        filename: screenshotFile,
-        count: 1,
-        size: '250x250'
-      }, basePath, function(err) {
-        if(err) {
-          console.log('An error occurred with ffmpeg: ' + err.message);
-        }
+    .screenshots({
+      count: 1,
+      filename: id + '.png',
+      folder: '/tmp',
+      size: '250x250'
     })
-    .output(basePath + '/' + videoFile)
     .size('640x?')
     .aspect('4:3')
     .audioCodec('aac')
@@ -173,16 +187,56 @@ exports.create = function(req, res) {
     .videoCodec('libx264')
     .videoBitrate(1000)
     .addOption('-vf', 'movie='+wmimage+ ' [watermark]; [in] [watermark] overlay=0:0 [out]')
+    .output(videoFile)
     .on('error', function(err, stdout, stderr) {
       if (err) {
-        console.log('An error occurred with ffmpeg: ' + err.message, stdout, stderr);
+        console.log('An error occurred with ffmpeg: ' + err.message, stdout, stderr);  
+        return handleError(res, err);
       }
     })
     .on('end', function() {
-      entry.thumbnail = "/static/" + screenshotFile;
-      entry.save();
-      fs.unlink(file.path);   // delete temp file
-      console.log('Finished processing video: ' + videoFile);
+      console.log('Finished processing video: ' + id);
+      var video_params = {
+        localFile: videoFile,
+        s3Params: {
+          Bucket: s3BucketName,
+          Key: id + '.mp4',
+          ACL: 'public-read'
+          // other options supported by putObject, except Body and ContentLength.
+          // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
+        },
+      };
+      var screenshot_params = {
+        localFile: screenshotFile,
+        s3Params: {
+          Bucket: s3BucketName,
+          Key: id + '.png',
+          ACL: 'public-read'
+        },
+      };
+      var uploader = client.uploadFile(video_params);
+      uploader.on('error', function(err) {
+        console.log("unable to upload:", err.stack);
+        entry.delete();
+      });
+      uploader.on('end', function() {
+        fs.unlink(file.path);   // delete temp files
+        fs.unlink(videoFile);
+        entry.video = s3.getPublicUrlHttp(s3BucketName, id + '.mp4');
+        entry.save();
+      });
+
+      uploader = client.uploadFile(screenshot_params);
+      uploader.on('error', function(err) {
+        console.log("unable to upload:", err.stack);
+        entry.delete();
+      });
+      uploader.on('end', function() {
+        fs.unlink(screenshotFile);
+        entry.thumbnail = s3.getPublicUrlHttp(s3BucketName, id + '.png');
+        entry.save();
+      });
+
     });
     return res.status(201).json(entry);
   });

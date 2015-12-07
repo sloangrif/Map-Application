@@ -14,10 +14,11 @@ var fs = require('fs');
 var path = require('path');
 
 var staticPath = path.resolve('./server/static');
-console.log(staticPath);
+console.log("Seeding server");
 
 // Delete uploaded files (images/videos)
 require("glob").glob(staticPath + "/*.*", function (er, files) {
+  console.log("Removing static files");
   files.forEach(function(file) {
     fs.unlinkSync(file)
   });

@@ -53,7 +53,10 @@ var all = {
   recaptcha: {
     siteKey:      process.env.RECAPTCHA_KEY || 'key',
     secretKey:    process.env.RECAPTCHA_SECRET || 'secret'
-  }
+  },
+
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY || 'secret',
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID || 'key'
 
 };
 
