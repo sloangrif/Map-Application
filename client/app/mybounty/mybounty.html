@@ -1,3 +1,36 @@
-<div class="col-md-12">
-This is the mybounty view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class = "container">
+	<div class="col-md-12" style="padding-bottom: 25px;">
+	<h2> {{user.name}} Total Earnings : $15 </h2>
+	</div>
+	<div class="col-md-12" style="padding-bottom: 40px;">
+	 <h3> Winning videos </h3>
+	 <table class = "table table-striped">
+	 	<thead>
+		 	<tr>
+		 		<th>Videos</th>
+		 		<th>Earnings</th>
+		 	</tr>
+	 	</thead>
+	 	<tbody>
+	 		<tr>
+	 			<td> Cheesedaddy </td>
+	 			<td> $3 </td>
+	 		</tr>
+	 		<tr>
+	 			<td> BentoCafe </td>
+	 			<td> $6 </td>
+	 		</tr>
+	 		<tr>
+	 			<td> Chipotle</td>
+	 			<td> $6 </td>
+	 		</tr>
+	 	</tbody>
+	 </table>
+	</div>
+	<div class = "col-md-12 text-center" >
+		<button class="btn btn-info btn-lg" style+"ce">Cash In</button>
+
+	</div>
+
 </div>
