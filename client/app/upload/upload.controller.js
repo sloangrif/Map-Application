@@ -65,7 +65,7 @@ angular.module('mapnApp')
    var upload = function(file) {
       $scope.uploading = true;
       var pin = {
-        name: 'Pin by ' + (Auth.getCurrentUser().id || ''),
+        name: 'Pin by: ' + (Auth.getCurrentUser()._id || ''),
         coordinates: [$scope.marker.coords.latitude, $scope.marker.coords.longitude]
       };
       $http.post('/api/pins/', pin)
