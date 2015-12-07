@@ -8,7 +8,7 @@ angular.module('mapnApp')
     $scope.lat = "29.6485";
     $scope.lng = "-82.345";
 
-    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
+    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 17 };
     $scope.markers = [];
     
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
