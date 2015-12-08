@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MainCtrl', function ($scope, $http, $location, $window) {
+  .controller('MainCtrl', function ($scope, $http, $location, $window, $state) {
     $scope.error = "";
     $scope.danger = false;
     $scope.lat = "29.6485";
