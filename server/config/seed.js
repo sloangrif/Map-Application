@@ -58,6 +58,8 @@ Pin.find({}).remove(function() {
   Pin.create({
     name : 'Cheese Daddy',
     description: 'Tasty grilled cheese sandwiches served with tomato soup and a refreshing drink.',
+    pin_type: 'business',
+    website: 'http://www.cheesedaddy.com',
     coordinates: [29.651634, -82.324826],
     hashtags: ['Grilled', 'Cheese', 'Sandwiches', 'Restaurant'],
     thumbnail: '/static/mapn/cheese.png'

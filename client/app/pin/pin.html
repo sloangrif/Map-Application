@@ -6,17 +6,20 @@
 <div class="container">
   <div class="row" style="padding-bottom:30px;">
     <div class="col-md-10">
-    <h2>{{error}}</h2>
       <div class = "col-sm-3">
           <img class="img-circle img-responsive" src = "{{pin.thumbnail}}"
              style="max-width: 300px; margin: 20px auto 10px auto">
       </div>
       <div class = "col-sm-6">
         <h1> {{pin.name}} </h1>
+	<p>{{pin.description}} </p>
+      	<p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-map-marker"></span>&emsp; (address goes here)</p>
+      	<p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-earphone"></span>&emsp; (phone # goes here) </p>
+      	<p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-link"></span>&emsp; {{pin.website}} </p>
       </div>
       <div class="col-sm-3 bounty" ng-show="pin.bounty">
-      <h3>Bounty</h3>
-      {{pin.bounty.description}}
+      	<h3>Bounty</h3>
+      	{{pin.bounty.description}}
       </div>
     </div>
   </div>

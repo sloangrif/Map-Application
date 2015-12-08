@@ -2,13 +2,13 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MainCtrl', function ($scope, $http, $location, $window, $timeout, $state) {
+  .controller('MainCtrl', function ($scope, $http, $location, $window) {
     $scope.error = "";
     $scope.danger = false;
     $scope.lat = "29.6485";
     $scope.lng = "-82.345";
 
-    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 10 };
+    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 16 };
     $scope.markers = [];
     
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
@@ -69,9 +69,7 @@ angular.module('mapnApp')
     $scope.getLocation = (function () {
 
       if (navigator.geolocation) {
-          console.log("getlocation");
           navigator.geolocation.getCurrentPosition(function(position){
-            console.log(position);
             $scope.lat = position.coords.latitude;
             $scope.lng = position.coords.longitude;
             $scope.map.center.latitude = position.coords.latitude;
@@ -87,7 +85,7 @@ angular.module('mapnApp')
     $scope.upload = function() {
       $state.transitionTo('upload_pin');
     };
-
+    
   });
 
 

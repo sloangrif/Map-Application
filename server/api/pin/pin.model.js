@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
 var PinSchema = new Schema({
   name: {type: String, required: true},
   description: String,
+  pin_type: {type: String, required: true, default: 'user'},
+  website: {type: String, required: false},
   thumbnail: {type: String, required: false},
   hashtags: [{type: String, lowercase: true}],
   active: {type: Boolean, default: true},
