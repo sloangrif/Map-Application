@@ -27,6 +27,7 @@
     "passport": "~0.2.0",
     "passport-facebook": "latest",
     "passport-local": "~0.1.6",
+    "s3": "^4.4.0",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {

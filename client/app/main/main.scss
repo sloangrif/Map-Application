@@ -2,7 +2,7 @@ body,html {
   height: 100%;
 }
 
-.angular-google-map-container {
+#main-map .angular-google-map-container {
     height: 85vh;
 }
 
@@ -11,7 +11,7 @@ body,html {
 }
 
 .profile-photo {
-  height: 100px;
-  width: 100px;
-  border-radius:100px;
+  height: 75px;
+  width: 75px;
+  border-radius:50px;
 }

@@ -5,23 +5,25 @@
 
 <div class="container">
   <div class="row" style="padding-bottom:30px;">
-    <h2>{{error}}</h2>
-    <div class = "col-xs-4 col-sm-3">
-      <img class="img-circle img-responsive" src = "{{pin.thumbnail}}">
+    <div class="col-md-10">
+      <div class = "col-sm-3 text-center">
+          <img class="profile-photo" src = "{{pin.thumbnail}}"
+             style="margin: 5px auto">
+      </div>
+      <div class = "col-sm-6">
+        <h1> {{pin.name}} </h1>
+        <p>{{pin.description}} </p>
+      	<!--
+        <p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-map-marker"></span>&emsp; (address goes here)</p>
+      	<p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-earphone"></span>&emsp;{{pin.phone}} </p>
+      	<p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-link"></span>&emsp; {{pin.website}} </p>
+        -->
+      </div>
+      <div class="col-sm-3 bounty" ng-show="pin.bounty">
+      	<h3>Bounty</h3>
+      	{{pin.bounty.description}}
+      </div>
     </div>
-    <div class = "col-sm-6">
-      <h1> {{pin.name}} </h1>
-      <p>{{pin.description}} </p>
-      <p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-map-marker"></span>&emsp; (address goes here)</p>
-      <p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-earphone"></span>&emsp; (phone # goes here) </p>
-      <p ng-show="{{pin.pin_type == business}}"><span class="glyphicon glyphicon-link"></span>&emsp; {{pin.website}} </p>
-    </div>
-    <div class="col-xs-1 col-sm-0"></div>
-    <div ng-show="{{pin.bounty != null}}" class="col-xs-10 col-sm-3 bounty">
-    <h3 style="padding:2%;">Bounty</h3>
-    {{pin.bounty.description}}
-    </div>
-    <div class="col-xs-1 col-sm-0"></div>
   </div>
 <div class="table">
 
@@ -54,7 +56,7 @@
   <div class="row">
     <!-- Likes -->
     <div class="col-sm-3"  style="text-align:center; margin-bottom:10px;" ng-repeat="module in pin.entries">
-      <div class="outer" ng-style="{'background-image':'url({{module.thumbnail}})'}">
+      <div class="outer" ng-style="{'background-image':'url({{module.thumbnail | trusted}})'}">
         <a href="#" ng-click="openEntry(module)" style="display:block">
           <img src="assets/images/blank.png" style="height:95px">
         </a>

@@ -26,6 +26,12 @@ angular.module('mapnApp', [
     });
   })
 
+  .filter('trusted', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+  })
+  
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers

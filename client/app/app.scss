@@ -40,11 +40,6 @@ body {
 a { text-decoration: none;  }
 li { list-style-type: none; }
 
-h1 {
-  font-family: 'HoneyScript', sans-serif;
-  font-size: 4em;
-}
-
 nav li:last-child a { border-bottom: none; }
 
 // Component styles are injected through grunt
@@ -58,6 +53,7 @@ nav li:last-child a { border-bottom: none; }
 @import 'mybounty/mybounty.scss';
 @import 'myvideos/myvideos.scss';
 @import 'pin/pin.scss';
+@import 'upload/upload.scss';
 @import 'entry/entry.scss';
 @import 'footer/footer.scss';
 @import 'modal/modal.scss';

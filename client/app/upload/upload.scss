@@ -1,0 +1,24 @@
+#angular-google-map-upload .angular-google-map-container {
+    height: 100px;
+}
+
+.upload-top {
+  background: #333;
+  color: #eee;
+  padding: 10px;
+  border-bottom: 1px solid #111
+}
+
+.upload-progress {
+  //visibility:hidden;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  border-radius: 0;
+  height: 10px;
+}
+
+.upload-form {
+  .form-group {
+    overflow:hidden;
+  }
+}

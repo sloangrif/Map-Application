@@ -2,13 +2,13 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MainCtrl', function ($scope, $http, $location, $window) {
+  .controller('MainCtrl', function ($scope, $http, $location, $window, $state) {
     $scope.error = "";
     $scope.danger = false;
     $scope.lat = "29.6485";
     $scope.lng = "-82.345";
 
-    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 17 };
+    $scope.map = { center: { latitude: $scope.lat, longitude: $scope.lng }, zoom: 16 };
     $scope.markers = [];
     
     var location = $scope.map.center.latitude + ',' + $scope.map.center.longitude;
@@ -43,7 +43,7 @@ angular.module('mapnApp')
       $scope.markers.push(marker);
     };
    
-    // debug purpose
+  
     $scope.showError = function (error) {
       switch (error.code) {
           case error.PERMISSION_DENIED:
@@ -61,15 +61,13 @@ angular.module('mapnApp')
       }
       $scope.$apply();
     };
-    // debug purpose
-    $scope.test = function(){
-      console.log("test");
-    };
+
     $scope.reload = function(){
       $window.location.reload();
-    }
-    $scope.getLocation = function () {
-      
+    };
+
+    $scope.getLocation = (function () {
+
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position){
             $scope.lat = position.coords.latitude;
@@ -78,15 +76,15 @@ angular.module('mapnApp')
             $scope.map.center.longitude = position.coords.longitude;
             $scope.$apply();
           });
-
       }
       else {
           $scope.error = "Geolocation is not supported by this browser.";
       }
-      
-    }
+    })();
 
-    $scope.getLocation();
+    $scope.upload = function() {
+      $state.transitionTo('upload_pin');
+    };
     
   });
 

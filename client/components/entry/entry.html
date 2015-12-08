@@ -16,7 +16,7 @@ content="{{getUrl(entry.thumbnail)}}" />
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <video ng-src="{{entry.video}}" controls style="width:100%">
+      <video ng-src="{{entry.video | trusted}}" controls style="width:100%">
     </div>
   </div>
   <div class="row">
