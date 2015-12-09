@@ -7,6 +7,7 @@
 .outer{
   position: relative;
   height: 150px;
+  margin-bottom: 50px;
   background-position: center;
   background-repeat: no-repeat;
   /*background-color: gray;*/
@@ -15,8 +16,8 @@
   position: absolute;
   top: 95;  /*transform: translateY(-50%);*/
   width: 100%;
-  vertical-align: middle;
-  line-height: 150px;
+  text-align: center;
+  
 }
 button{
   background-color: Transparent;
@@ -32,12 +33,11 @@ button{
   padding: 20px;
 
 }
+
 .divider{
     width:5px;
     height:auto;
     display:inline-block;
 }
-.bounty {
-  background: #eee;
-  padding-bottom: 1em;
-}
+
+

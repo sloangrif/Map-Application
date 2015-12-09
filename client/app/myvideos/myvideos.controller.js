@@ -1,147 +1,30 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MyvideosCtrl', function ($scope, Auth, User, $state, $stateParams, $http) {
+  .controller('MyvideosCtrl', function ($scope, Auth, User, $state, $stateParams, $modal, $timeout, $http) {
   
-
+  //gets user id
   var userID = Auth.getCurrentUser()._id;
   $scope.user = Auth.getCurrentUser();
 
-    $scope.openEntry = function(entry) {
-      $state.go('user.entry', {'entryid': entry._id});
-    };
     
+//api call to get user entries
   $http.get('/api/entries?creator_id='+userID).
       then(function(response) {
         // do something with 'response' data
         $scope.entries = response.data;
-        //user.entries = response.data;
+        
         $scope.userID = userID;
-        //$scope.entries = response.data;
-        //userID = response.data;
-        //userID.entries = response.data;
-        //$scope.user = user;
+        
       }, function(error) {
         // handle error if needed
         $scope.error = error.status + '\t' + error.statusText;
       });
-    
-    
-    
 
+     //opens video module  
+    $scope.openEntry = function(entry) {
+      $state.go('user.entry', {'entryid': entry._id});
+    };
 });
 
-/*$http.get('/api/user/'+id).
-  then(function(response) {
-    var user = response.data;
-     
-    $http.get('/api/entries?creator_id='+userID).
-        then(function(response) {
-          // do something with 'response' data
-          user.entries = response.data;
-          $scope.user = userID;
-        }, function(error) {
-          // handle error if needed
-          $scope.error = error.status + '\t' + error.statusText;
-        });
-        });
-   
-    $scope.openEntry = function(entry) {
-      $state.go('userID.entry', {'entryid': entry._id});
-    };
-   */
-   
-/*
-.controller('PinCtrl', function ($scope, $stateParams, $state, $http, $modal, $timeout, Auth) {
-    var id = $stateParams.id;
-    $scope.pin = {'id': id};
-    $scope.error = '';
 
-    $scope.uploadOpen = false;
-    $scope.isLoggedIn = false;
-    Auth.isLoggedInAsync(function(loggedIn) {
-      $scope.isLoggedIn = loggedIn;
-    });
-
-    $scope.like = function(entry){
-      if(entry.score != 1){
-        if(entry.score==-1){
-          entry.dislikes--;
-        }
-        entry.score = 1;
-        entry.likes++;
-        $http.post('/api/entries/' + entry._id + '/like');
-      }
-    };
-
-    $scope.dislike = function(entry){
-      if(entry.score != -1){
-        if(entry.score==1){
-          entry.likes--;
-        }
-        entry.score = -1;
-        entry.dislikes++;
-        $http.post('/api/entries/'+ entry._id + '/dislike');
-      }
-    };
-
-
-    $scope.addItem = function(file, errors) {
-      if (!$scope.uploading) {
-        $scope.uploading = true;
-        $timeout(function() {
-          var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'components/upload/upload.html',
-            controller: 'UploadCtrl',
-            resolve: {
-              file: function () {
-                return file;
-              },
-              pin: function() {
-                return $scope.pin;
-              },
-              errors: function() {
-                return errors;
-              }
-            }
-          });
-          modalInstance.result.then(function() {
-            $scope.uploading = false;
-          }, function() {
-            $scope.uploading = false;
-          });
-        },100);
-      }
-    };
-
-    $scope.openEntry = function(entry) {
-      $state.go('pin.entry', {'entryid': entry._id});
-    };
-
-    //TODO MOVE THIS TO SERVICE
-    // allow for communication between pin & entry
-    $http.get('/api/pins/'+id).
-      then(function(response) {
-        var pin = response.data;
-        $http.get('/api/entries?pin='+id).
-          then(function(response) {
-            pin.entries = response.data;
-            $scope.pin = pin;
-          }, function(error) {
-            $scope.error = error.status + '\t' + error.statusText;
-          });
-        if (pin.bounty) {
-          $http.get('/api/bounties/'+pin.bounty).
-            then(function(response) {
-              pin.bounty = response.data;
-            }, function(error) {
-              $scope.error = error.status + '\t' + error.statusText;
-            });
-        }
-
-
-      }, function(error) {
-        $scope.error = error.status + '\t' + error.statusText;
-    });
-  });*/
