@@ -2,13 +2,15 @@
 
 <div class="container">
   <div class="row" style="padding-bottom:30px;">
+    <div class="col-md-10">
   	<div class = "col-sm-3">
-        <img ng-src="{{user.photo || '/static/mapn/profile.png'}}" class="img-circle img-responsive">
+        <img ng-src="{{user.photo || '/static/mapn/profile.png'}}" class="img-circle img-responsive" style="margin: 5px auto">
       </div>
       <div class = "col-sm-6">
         <h1> {{user.name}} </h1>
     </div>
   </div>
+</div>
 <div class="table">
 
   <!-- Video Section -->
@@ -22,8 +24,8 @@
   </div>
   <div class="row">
     <!-- Likes -->
-    <div class="col-sm-3"  style="text-align:center; margin-bottom:10px;" ng-repeat="module in user.entries">
-      <div class="outer" ng-style="{'background-image':'url({{module.thumbnail}})'}">
+    <div class="col-sm-3"  style="text-align:center; margin-bottom:10px;" ng-repeat="module in entries">
+       <div class="outer" ng-style="{'background-image':'url({{module.thumbnail | trusted}})'}">
         <a href="#" ng-click="openEntry(module)" style="display:block">
           <img src="assets/images/blank.png" style="height:95px">
         </a>

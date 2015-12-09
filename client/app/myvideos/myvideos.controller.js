@@ -1,13 +1,36 @@
 'use strict';
 
 angular.module('mapnApp')
-  .controller('MyvideosCtrl', function ($scope, Auth, User, $http, $timeout, $modal) {
-    
-    
-    
-  //$scope.uploadOpen = false;
-  var userID = Auth.getCurrentUser();
+  .controller('MyvideosCtrl', function ($scope, Auth, User, $state, $stateParams, $http) {
+  
+
+  var userID = Auth.getCurrentUser()._id;
   $scope.user = Auth.getCurrentUser();
+
+    $scope.openEntry = function(entry) {
+      $state.go('user.entry', {'entryid': entry._id});
+    };
+    
+  $http.get('/api/entries?creator_id='+userID).
+      then(function(response) {
+        // do something with 'response' data
+        $scope.entries = response.data;
+        //user.entries = response.data;
+        $scope.userID = userID;
+        //$scope.entries = response.data;
+        //userID = response.data;
+        //userID.entries = response.data;
+        //$scope.user = user;
+      }, function(error) {
+        // handle error if needed
+        $scope.error = error.status + '\t' + error.statusText;
+      });
+    
+    
+    
+
+});
+
 /*$http.get('/api/user/'+id).
   then(function(response) {
     var user = response.data;
@@ -21,24 +44,13 @@ angular.module('mapnApp')
           // handle error if needed
           $scope.error = error.status + '\t' + error.statusText;
         });
-        });*/
-
-  $http.get('/api/entries?creator_id='+userID).
-      then(function(response) {
-        // do something with 'response' data
-
-        userID.entries = response.data;
-
-        
-      }, function(error) {
-        // handle error if needed
-        $scope.error = error.status + '\t' + error.statusText;
-      });
-
-      
-    
-
-});
+        });
+   
+    $scope.openEntry = function(entry) {
+      $state.go('userID.entry', {'entryid': entry._id});
+    };
+   */
+   
 /*
 .controller('PinCtrl', function ($scope, $stateParams, $state, $http, $modal, $timeout, Auth) {
     var id = $stateParams.id;

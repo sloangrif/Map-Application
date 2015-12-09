@@ -8,5 +8,5 @@ angular.module('mapnApp')
         templateUrl: 'app/myvideos/myvideos.html',
         controller: 'MyvideosCtrl'
       });
-  
+  		
   });
